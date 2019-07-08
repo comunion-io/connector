@@ -18,6 +18,7 @@ moi = require('mongodb').ObjectID
 _gs = require('./setting')
 
 _.extend global,
+	db: 'comunion'
 	favicon: require('serve-favicon')
 	async: require('async')
 	fs: require('fs')
@@ -120,51 +121,17 @@ app._community = {}
 log 'init app'
 
 initDb = ->
-	await dao.initDb _mdb, setting
-	log 'init community ...'
-	for co in setting.load
-		_gCache[co] = {}
-		log 'set: ' + co
-		path = "#{__dirname}/public/module/#{co}/script/setting.js"
-		if fs.existsSync path
-			ss = require(path)
-			if s = _.defaults (ss[env] || {}), ss.default
-				_.defaults s, setting
-		_settingCtn[co] = s
-		cc = await dao.nc(_mdb, 'community').findOne({code: co})
+	await dao.initDb db, setting
 
-		if cc
-			await dao.initDb co, setting
-			if s.initDb
-				iDb.initData co, s
-		else
-			cc = await iDb.initData co, s
-			await dao.initDb co, setting
+	dao.index db, 'session', {createdAt: 1},
+		expireAfterSeconds: Date.day
+		background: true
 
-		app._community[cc.url] = cc
+	appCache[db] = new cacheMk(db)
 
-		if cc.exDomain
-			for tt in cc.exDomain
-				app._community[tt] = cc
-
-		dao.pick(co, 'session').createIndex {createdAt: 1},
-			expireAfterSeconds: Date.day
-			background: true
-
-		appCache[co] = new cacheMk(co)
-
-		path = "#{_path}/public/module/#{co}/script/server.js"
-
-		if fs.existsSync path
-			try
-				require path
-			catch err
-				log 'err sever script: '
-				log err
-
-		dao.index co, 'cache', {createdAt: 1},
-			expireAfterSeconds: 3600 * 24
-			background: true
+	dao.index db, 'cache', {createdAt: 1},
+		expireAfterSeconds: 3600 * 24
+		background: true
 
 initDb()
 
