@@ -1,6 +1,9 @@
 Web3 = require('web3')
 
-web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:7545"))
+if web3?
+	web3 = new Web3(web3.currentProvider)
+else
+	web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.etherscan.io/address/0xfa374fb3a47285dd62244eb8e72a4167339560eb"))
 
 module.exports =
 
@@ -10,3 +13,10 @@ module.exports =
 
 	send: (abiFile, addr, acct, data)->
 		@getContract(abiFile, addr).sendCoin.sendTransaction(acct, 1, data)
+
+	trans: (from, data)->
+		rec = await web3.eth.sendTransaction({from, data})
+			.once 'receipt', (rec)->
+			.once 'confirmation', (cfn, rec)->
+			.on 'err', (err)-> log err
+		log rec

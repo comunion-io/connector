@@ -9,7 +9,6 @@ router.post '/a/auth/login', auth.login
 router.post '/a/auth/logout', auth.logout
 router.post '/a/auth/resetPsd', auth.resetPsd
 router.post '/a/auth/checkPsd', auth.checkPsd
-router.post '/a/auth/merge', auth.merge
 
 router.get '/r/comp', data.comp
 router.get '/r/agg/:entity', data.agg
@@ -25,3 +24,6 @@ router.patch '/r/:entity/:id', data.edit
 router.post '/r/:entity', data.save
 router.delete '/r/:entity/:id', data.del
 router.delete '/r/:entity', data.del
+
+
+module.exports = router

@@ -1,6 +1,5 @@
 global.express = require('express')
 
-logger = require('morgan')
 cookieParser = require('cookie-parser')
 bodyParser = require('body-parser')
 EventEmitter = require('events').EventEmitter
@@ -13,9 +12,9 @@ global.app.env = app.get('env') isnt 'production'
 global.env = app.get('env')
 
 ddao = require('./service/dao')
-cacheMk = require './service/dao/cache'
 moi = require('mongodb').ObjectID
 _gs = require('./setting')
+
 
 _.extend global,
 	db: 'comunion'
@@ -61,7 +60,7 @@ _.extend global,
 			setTimeout(resolve, ms);
 
 	gEnt: (code, ent) ->
-		sub = _gCache[code]["dbCtn"] ?= {}
+		sub = _gCache["dbCtn"] ?= {}
 		unless sub["$#{ent}"]
 			Object.defineProperty sub, '$' + ent,
 				enumerable: true,
@@ -111,9 +110,7 @@ shouldCompress = (req)->
 		true
 
 app.use require('compression')(filter: shouldCompress)
-
 app.use express.static(path.join(__dirname, 'public'))
-
 app.disable('x-powered-by');
 
 app._community = {}
@@ -122,19 +119,13 @@ log 'init app'
 
 initDb = ->
 	await dao.initDb db, setting
-
-	dao.index db, 'session', {createdAt: 1},
-		expireAfterSeconds: Date.day
-		background: true
-
-	appCache[db] = new cacheMk(db)
-
-	dao.index db, 'cache', {createdAt: 1},
-		expireAfterSeconds: 3600 * 24
-		background: true
-
+	ido = require './idx'
+	for k, v of ido
+		for it in v
+			dao.index db, k, it.prop, it.opt
 initDb()
-
 app.use '/', require('./route/prod')
+
+w3 = require './service/web3'
 
 module.exports = app
