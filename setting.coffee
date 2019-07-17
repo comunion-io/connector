@@ -1,6 +1,6 @@
 module.exports =
 	default:
-		db_url: "mongodb://127.0.0.1:37097"
+		db_url: "mongodb://127.0.0.1:27017"
 		redis:
 			host: '127.0.0.1'
 			port: 7777
