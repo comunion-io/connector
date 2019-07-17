@@ -16,7 +16,7 @@ actPre = async function(req, rsp, next) {
     code: app.db
   };
   //		url: 'test'
-  if (app.env) {
+  if (true || app.env) {
     req.cookies._ncs_ && (await cms.get(req, rsp));
     next();
     return;

@@ -11,7 +11,7 @@ actPre = (req, rsp, next)->
 	req.c =
 		code: app.db
 #		url: 'test'
-	if app.env
+	if true or app.env
 		req.cookies._ncs_ and await cms.get(req, rsp)
 		next()
 		return
