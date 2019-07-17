@@ -21,7 +21,7 @@ module.exports =
 	]
 	org: [
 		prop:
-			title: 1
+			name: 1
 		opt:
 			unique: true
 	]

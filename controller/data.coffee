@@ -46,7 +46,7 @@ dataController =
 		rsp.send ret
 
 	save: (req, rsp) ->
-		ret = await save req.c.code, req.params.entity, req
+		ret = await save req.c.code, req.params.entity || req.entity, req
 		if ret.error
 			rsp.status 405
 		rsp.send ret

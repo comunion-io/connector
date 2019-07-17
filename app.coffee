@@ -6,7 +6,7 @@ EventEmitter = require('events').EventEmitter
 
 global._ = require('underscore')
 global._path = __dirname
-global.util = require('./public/ext/common')
+global.util = _.extend(require('./public/ext/common'), require('./public/ext/util'))
 global.app = express()
 global.app.env = app.get('env') isnt 'production'
 global.env = app.get('env')
@@ -126,6 +126,5 @@ initDb = ->
 initDb()
 app.use '/', require('./route/prod')
 
-w3 = require './service/web3'
-
+#w3 = require './service/web3'
 module.exports = app

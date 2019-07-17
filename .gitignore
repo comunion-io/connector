@@ -4,9 +4,7 @@
 .idea
 npm-debug.log
 
-*.js
 *.map
-*.css
 *.log
 *.html
 public/.dev
