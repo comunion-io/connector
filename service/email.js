@@ -8,9 +8,9 @@ smtpTransport = require('nodemailer-smtp-transport');
 transPool = function(email, host, psd) {
   return _ePool[email] != null ? _ePool[email] : _ePool[email] = nodemailer.createTransport(smtpTransport({
     host: host,
-    port: 465,
-    //		port: 587
-    secureConnection: true,
+    port: 2525,
+    secure: false,
+    ignoreTLS: true,
     auth: {
       user: email,
       pass: psd

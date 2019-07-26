@@ -50,7 +50,7 @@ router.post '/r/:entity', data.save
 router.delete '/r/:entity/:id', data.del
 router.delete '/r/:entity', data.del
 
-
+#
 #do ->
 #	sStr = pug.renderFile("#{_path}/view/tmpl/regDone.pug", psd: '123')
 #
@@ -58,7 +58,7 @@ router.delete '/r/:entity', data.del
 #		email: 'postmaster@comunion.io'
 #		mailHost: 'mail.comunion.io'
 #		mailPsd: '7Sn7TPoEzePmn7ze'
-#		name: 'Comunion'
+#		name: 'Comunion Website'
 #	try
 #		sEmail c,
 #			to: '69692418@qq.com'
