@@ -39,7 +39,6 @@ _.extend global,
 		comunion: {}
 	sEmail: require './service/email'
 	gs: (code, fn) ->
-		log gStub
 		if gStub[code] and gStub[code][fn]
 			gStub[code][fn]
 		else

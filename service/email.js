@@ -24,8 +24,6 @@ module.exports = function(c, mo) {
     name: c.name,
     address: c.email
   };
-  log(mo);
-  log(c);
   return transPool(c.email, c.mailHost, c.mailPsd).sendMail(mo, function(err, info) {
     log('after email...');
     if (err) {

@@ -16,8 +16,6 @@ module.exports = (c, mo)->
 	mo.from =
 		name: c.name
 		address: c.email
-	log mo
-	log c
 	transPool(c.email, c.mailHost, c.mailPsd).sendMail mo, (err, info)->
 		log 'after email...'
 		if err

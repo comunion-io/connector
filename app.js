@@ -62,7 +62,6 @@ _.extend(global, {
   },
   sEmail: require('./service/email'),
   gs: function(code, fn) {
-    log(gStub);
     if (gStub[code] && gStub[code][fn]) {
       return gStub[code][fn];
     } else {
