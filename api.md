@@ -138,11 +138,54 @@ Content-Type: application/json
 
 ### 查询组织
 
-GET http://localhost:3000/r/org
-GET http://localhost:3000/r/org?offset=0&max=2
+#### 查询列表
+GET http://178.128.221.42:3000/r/org
+
+GET http://178.128.221.42:3000/r/org?offset=0&max=2
+
+GET http://178.128.221.42:3000/r/org?q[name]=sdfs&q[mission]=wer
+
+多属性查询，直接使用jquery的$.get方法，将参数按字面量方式传入，会自动编码为上面格式
+
+$.get(
+    url,
+    {q:{name:'sdf',mission:'wer'}}
+)
 
 `
 {"entities":[{"_id":"5d2e9e38722d9b223ee09b0e","name":"manstein","email":"​liulei@163.com​","wallet":[{"eth":"0x1efekuej8fhfhkf3iud8djdjj"}],"website":"​www.manstein.com​","mission":"manstein","description":"manstein","logo":"http://10.23.122.11/awk1.jpg","social":[{"linkedin":"http://www.linkedin.com/manstein"},{"twitter":"http://twitter.com/manstein"}],"members":[{"wallet":{"address":"1qsw3e4rcfftgy6hgtgy6","network":"ETH"},"email":"​liulei@163.com​","description":"he is really good","role":"CTO"}],"dateCreated":1563336248867,"lastUpdated":1563336715881,"_e":"org"}],"count":1}
+`
+
+#### 查询单个
+GET http://178.128.221.42:3000/r/org/5d3830aeddfc12303e0b283b
+
+GET http://178.128.221.42:3000/r/org/name/sdfs
+
+`
+{"entity": {
+     "_id": "5d3830aeddfc12303e0b283b",
+     "name": "sdfs",
+     "type": 3,
+     "logo": "",
+     "email": "rt@ee.com",
+     "wallet": [
+       {
+         "name": "eth",
+         "value": ""
+       }
+     ],
+     "website": "tyr",
+     "mission": "wer",
+     "vision": "ry",
+     "description": "r",
+     "social": [],
+     "members": [],
+     "dateCreated": 1563963566107,
+     "lastUpdated": 1563963566107,
+     "_e": "org"
+   },
+   "msg": null
+   }
 `
 
 ### 删除组织

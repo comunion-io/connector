@@ -41,14 +41,10 @@ dataController =
 	edit: (req, rsp) ->
 		req.id = req.params.id
 		ret = await edit req.c.code, req.params.entity, req
-		if ret.error
-			rsp.status 405
 		rsp.send ret
 
 	save: (req, rsp) ->
 		ret = await save req.c.code, req.params.entity || req.entity, req
-		if ret.error
-			rsp.status 405
 		rsp.send ret
 
 	comp: (req, rsp) ->

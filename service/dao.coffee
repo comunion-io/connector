@@ -152,7 +152,7 @@ module.exports = ->
 			callback?(ret)
 			ret
 		catch e
-			log e
+			throw e
 
 	@del = ()->
 		log 'rm'

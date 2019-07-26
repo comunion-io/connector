@@ -20,6 +20,7 @@ _.extend global,
 	db: 'comunion'
 	favicon: require('serve-favicon')
 	async: require('async')
+	pug: require('pug')
 	fs: require('fs')
 	path: require('path')
 	cheerio: require('cheerio')
@@ -34,8 +35,11 @@ _.extend global,
 		console.error msg
 	dao: new ddao()
 	queryUtil: require './service/dao/queryUtil'
-	gStub: {}
+	gStub:
+		comunion: {}
+	sEmail: require './service/email'
 	gs: (code, fn) ->
+		log gStub
 		if gStub[code] and gStub[code][fn]
 			gStub[code][fn]
 		else
@@ -125,6 +129,9 @@ initDb = ->
 			dao.index db, k, it.prop, it.opt
 initDb()
 app.use '/', require('./route/prod')
+require './controller/afterSave'
+
+log gStub
 
 #w3 = require './service/web3'
 module.exports = app

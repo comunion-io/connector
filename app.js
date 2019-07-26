@@ -31,6 +31,7 @@ _.extend(global, {
   db: 'comunion',
   favicon: require('serve-favicon'),
   async: require('async'),
+  pug: require('pug'),
   fs: require('fs'),
   path: require('path'),
   cheerio: require('cheerio'),
@@ -56,8 +57,12 @@ _.extend(global, {
   },
   dao: new ddao(),
   queryUtil: require('./service/dao/queryUtil'),
-  gStub: {},
+  gStub: {
+    comunion: {}
+  },
+  sEmail: require('./service/email'),
   gs: function(code, fn) {
+    log(gStub);
     if (gStub[code] && gStub[code][fn]) {
       return gStub[code][fn];
     } else {
@@ -187,6 +192,10 @@ initDb = async function() {
 initDb();
 
 app.use('/', require('./route/prod'));
+
+require('./controller/afterSave');
+
+log(gStub);
 
 //w3 = require './service/web3'
 module.exports = app;

@@ -30,6 +30,14 @@ module.exports = {
       opt: {
         unique: true
       }
+    },
+    {
+      prop: {
+        email: 1
+      },
+      opt: {
+        unique: true
+      }
     }
   ],
   org: [

@@ -35,17 +35,22 @@ module.exports = (code, entity, d)->
 			$set: bo
 	if unset
 		bo.$unset = unset
+	try
+		item = await dao.findAndUpdate code, entity, filter, bo
 
-	item = await dao.findAndUpdate code, entity, filter, bo
+		queryUtil.afterPersist(item, entity)
 
-	queryUtil.afterPersist(item, entity)
+		gs(code, it)(d, item) for it in after.split(',') if after
 
-	gs(code, it)(d, item) for it in after.split(',') if after
+		ri = if _attrs
+			_attrs.push('_id')
+			_.pick(item, _attrs)
+		else
+			item
 
-	ri = if _attrs
-		_attrs.push('_id')
-		_.pick(item, _attrs)
-	else
-		item
+		util.r ri, 'm_update_ok'
+	catch e
+		log e
+		msg: e.errmsg
+		err: 1
 
-	util.r ri, 'm_update_ok'

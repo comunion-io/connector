@@ -7,13 +7,13 @@ auth = require('../controller/auth');
 
 data = require('../controller/data');
 
-authStr = app.db + ':test';
+log(authStr = db + ':test');
 
 actPre = async function(req, rsp, next) {
   var hd;
   hd = req.headers;
   req.c = {
-    code: app.db
+    code: db
   };
   //		url: 'test'
   if (true || app.env) {
@@ -77,4 +77,20 @@ router.delete('/r/:entity/:id', data.del);
 
 router.delete('/r/:entity', data.del);
 
+//do ->
+//	sStr = pug.renderFile("#{_path}/view/tmpl/regDone.pug", psd: '123')
+
+//	c =
+//		email: 'postmaster@comunion.io'
+//		mailHost: 'mail.comunion.io'
+//		mailPsd: '7Sn7TPoEzePmn7ze'
+//		name: 'Comunion'
+//	try
+//		sEmail c,
+//			to: '69692418@qq.com'
+//			subject: 'good one123'
+//			text: 'test done'
+//			html: sStr
+//	catch e
+//		log e
 module.exports = router;

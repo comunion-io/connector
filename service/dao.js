@@ -261,7 +261,7 @@ module.exports = function() {
       return ret;
     } catch (error) {
       e = error;
-      return log(e);
+      throw e;
     }
   };
   this.del = function() {

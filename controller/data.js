@@ -61,17 +61,11 @@ dataController = {
     var ret;
     req.id = req.params.id;
     ret = (await edit(req.c.code, req.params.entity, req));
-    if (ret.error) {
-      rsp.status(405);
-    }
     return rsp.send(ret);
   },
   save: async function(req, rsp) {
     var ret;
     ret = (await save(req.c.code, req.params.entity || req.entity, req));
-    if (ret.error) {
-      rsp.status(405);
-    }
     return rsp.send(ret);
   },
   comp: function(req, rsp) {
