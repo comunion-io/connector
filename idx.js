@@ -28,6 +28,7 @@ module.exports = {
         username: 1
       },
       opt: {
+        sparse: true,
         unique: true
       }
     },

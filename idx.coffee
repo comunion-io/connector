@@ -17,6 +17,7 @@ module.exports =
 		prop:
 			username: 1
 		opt:
+			sparse: true
 			unique: true
 	,
 		prop:
