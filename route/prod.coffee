@@ -35,6 +35,8 @@ router.post '/a/auth/resetPsd', auth.resetPsd
 router.post '/a/auth/checkPsd', auth.checkPsd
 router.post '/a/auth/register', auth.register, data.save
 
+router.get '/a/org/orgStatus/:id', auth.orgStatus
+
 router.get '/r/comp', data.comp
 router.get '/r/agg/:entity', data.agg
 router.get '/r/userRank/:entity/:key/:val/:prop', data.userRank

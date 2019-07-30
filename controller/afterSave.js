@@ -12,7 +12,7 @@ gStub.comunion = {
     var opt, sStr, type;
     type = req.originalUrl.indexOf('resetPsd') > -1 ? 'resetPsd' : 'newUser';
     opt = {
-      psd: req.body.password,
+      psd: req.password,
       type: type,
       username: item.username
     };

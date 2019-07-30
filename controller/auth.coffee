@@ -11,7 +11,6 @@ errAuth = (req, rsp)->
 		msg: 'm_login_f'
 		toUrl: req.body.toUrl
 
-
 module.exports =
 
 	check: (req, rsp) ->
@@ -53,8 +52,9 @@ module.exports =
 			rsp.send
 				err: 1
 				msg: '数据错误'
-		log bo.password
+
 		req.entity = 'user'
+		req.password = bo.password
 		bo.password = util.sha256(bo.password)
 		next()
 
@@ -82,6 +82,15 @@ module.exports =
 		else
 			rsp.status 390
 			rsp.send msg: '用户不存在'
+
+	orgStatus: (req, rsp) ->
+		org = await dao.get req.c.code, 'org', _id: oid(req.params.id)
+		ret = if org
+			status: org.status
+		else
+			err: 1
+			msg: 'No org'
+		rsp.send ret
 
 	checkPsd: (req, rsp) ->
 		bo = req.body

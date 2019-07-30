@@ -72,8 +72,8 @@ module.exports = {
         msg: '数据错误'
       });
     }
-    log(bo.password);
     req.entity = 'user';
+    req.password = bo.password;
     bo.password = util.sha256(bo.password);
     return next();
   },
@@ -108,6 +108,19 @@ module.exports = {
         msg: '用户不存在'
       });
     }
+  },
+  orgStatus: async function(req, rsp) {
+    var org, ret;
+    org = (await dao.get(req.c.code, 'org', {
+      _id: oid(req.params.id)
+    }));
+    ret = org ? {
+      status: org.status
+    } : {
+      err: 1,
+      msg: 'No org'
+    };
+    return rsp.send(ret);
   },
   checkPsd: async function(req, rsp) {
     var bo, user;

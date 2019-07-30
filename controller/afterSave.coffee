@@ -10,7 +10,7 @@ gStub.comunion =
 		else
 			'newUser'
 		opt =
-			psd: req.body.password
+			psd: req.password
 			type: type
 			username: item.username
 
