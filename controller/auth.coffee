@@ -20,7 +20,6 @@ module.exports =
 		bo = req.body
 		opt =
 			username: bo.username
-		log opt
 		if user = await dao.get(code, 'user', opt)
 			if bo._en
 				if user.password isnt bo.password

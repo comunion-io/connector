@@ -30,7 +30,6 @@ module.exports = {
     opt = {
       username: bo.username
     };
-    log(opt);
     if (user = (await dao.get(code, 'user', opt))) {
       if (bo._en) {
         if (user.password !== bo.password) {
