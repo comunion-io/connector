@@ -18,7 +18,9 @@ module.exports =
 
 	login: (req, rsp) ->
 		bo = req.body
-		opt =
+		opt = if bo.email
+			email: bo.email
+		else
 			username: bo.username
 		if user = await dao.get(code, 'user', opt)
 			if bo._en

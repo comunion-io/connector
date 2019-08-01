@@ -27,7 +27,9 @@ module.exports = {
   login: async function(req, rsp) {
     var bo, opt, user;
     bo = req.body;
-    opt = {
+    opt = bo.email ? {
+      email: bo.email
+    } : {
       username: bo.username
     };
     if (user = (await dao.get(code, 'user', opt))) {

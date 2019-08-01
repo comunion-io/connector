@@ -44,7 +44,22 @@ module.exports = function() {
     return gEnt(db, entity).aggregate(filter);
   };
   this.index = function(db, entity, index, opt) {
-    return gEnt(db, entity).createIndex(index, opt);
+    var Ent, e, i, it, len, ref, results;
+    Ent = gEnt(db, entity);
+    try {
+      //		Ent.dropIndexes()
+      return Ent.createIndex(index, opt);
+    } catch (error) {
+      e = error;
+      log('fuck!11');
+      ref = Ent.getIndexes();
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        it = ref[i];
+        results.push(Ent.dropIndex(opt));
+      }
+      return results;
+    }
   };
   this.get = async function(db, ent, filter, callback) {
     var doc, e, opt;

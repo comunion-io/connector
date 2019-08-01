@@ -196,5 +196,4 @@ require('./controller/afterSave');
 
 log(gStub);
 
-//w3 = require './service/web3'
 module.exports = app;

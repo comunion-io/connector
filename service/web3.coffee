@@ -20,3 +20,10 @@ module.exports =
 			.once 'confirmation', (cfn, rec)->
 			.on 'err', (err)-> log err
 		log rec
+
+	checkTran: (hash) ->
+		try
+			log 'call'
+			log res = await web3.eth.getTransaction(hash)
+		catch e
+			log e

@@ -31,7 +31,14 @@ module.exports = ->
 		gEnt(db, entity).aggregate filter
 
 	@index = (db, entity, index, opt)->
-		gEnt(db, entity).createIndex index, opt
+		Ent = gEnt(db, entity)
+#		Ent.dropIndexes()
+		try
+			Ent.createIndex index, opt
+		catch e
+			log 'fuck!11'
+			for it in Ent.getIndexes()
+				Ent.dropIndex opt
 
 	@get = (db, ent, filter, callback)->
 		opt = {}

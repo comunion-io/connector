@@ -24,5 +24,15 @@ module.exports = {
       return log(err);
     }));
     return log(rec);
+  },
+  checkTran: async function(hash) {
+    var e, res;
+    try {
+      log('call');
+      return log(res = (await web3.eth.getTransaction(hash)));
+    } catch (error) {
+      e = error;
+      return log(e);
+    }
   }
 };
