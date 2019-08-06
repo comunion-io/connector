@@ -76,6 +76,24 @@ Content-Type: application/json
   "password": "psd1"
 }
 `
+###检查密码
+POST /a/auth/checkPsd
+
+参数：
+
+用户id: _id
+密码：password
+     
+###重置密码
+POST /a/auth/resetPsd
+
+参数：
+email: 用户邮箱
+password：新密码
+
+如果给用户发送邮件，请添加：
+afterSave: 'sendPsdEmail'
+
 
 ### 用户查询
 GET http://localhost:3000/r/org

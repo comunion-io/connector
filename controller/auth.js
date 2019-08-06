@@ -82,16 +82,7 @@ module.exports = {
   },
   resetPsd: async function(req, rsp) {
     var $set, bo, fo, res;
-    bo = req.body;
     code = req.c.code;
-    res = gs(null, 'verifyCode')(req, bo);
-    if (res.error) {
-      rsp.status(390);
-      rsp.send({
-        msg: '验证码错误'
-      });
-      return;
-    }
     bo = req.body;
     fo = bo.phone ? {
       phone: bo.phone
