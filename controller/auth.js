@@ -119,7 +119,7 @@ module.exports = {
       _id: oid(req.params.id)
     }))) {
       rw = (await web3.checkTran(org.hash));
-      ret = rw.blockHash ? ($set = {
+      ret = rw.blockNumber ? ($set = {
         status: 2
       }, dao.findAndUpdate(code, 'org', {
         _id: org._id
