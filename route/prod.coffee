@@ -52,14 +52,14 @@ router.post '/r/:entity', data.save
 router.delete '/r/:entity/:id', data.del
 router.delete '/r/:entity', data.del
 
-#
+
 #do ->
 #	sStr = pug.renderFile("#{_path}/view/tmpl/regDone.pug", psd: '123')
 #
 #	c =
-#		email: 'postmaster@comunion.io'
-#		mailHost: 'mail.comunion.io'
-#		mailPsd: '7Sn7TPoEzePmn7ze'
+#		email: 'service@comunion.io'
+#		mailHost: 'smtp.exmail.qq.com'
+#		mailPsd: 'RjZoofwvjpamFk89'
 #		name: 'Comunion Website'
 #	try
 #		sEmail c,
@@ -69,9 +69,7 @@ router.delete '/r/:entity', data.del
 #			html: sStr
 #	catch e
 #		log e
-
-web3 = require '../service/web3'
-
+#web3 = require '../service/web3'
 #web3.checkTran('0x8c13609f51466873eb283133ac952805155e1947db0a94a0ed7acb65b340c39f')
 
 

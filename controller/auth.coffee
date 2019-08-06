@@ -1,5 +1,7 @@
 code = app.db
 
+web3 = require '../service/web3'
+
 afterAuth = (user, req, rsp)->
 	rsp.send
 		user: user
@@ -85,12 +87,19 @@ module.exports =
 			rsp.send msg: '用户不存在'
 
 	orgStatus: (req, rsp) ->
-		org = await dao.get req.c.code, 'org', _id: oid(req.params.id)
-		ret = if org
-			status: org.status
+		code = req.c.code
+		if org = await dao.get code, 'org', _id: oid(req.params.id)
+			rw = await web3.checkTran(org.hash)
+			ret = if rw.blockHash
+				$set = status: 2
+				dao.findAndUpdate code, 'org', {_id: org._id}, {$set}
+				status: 2
+			else
+				status: 1
 		else
-			err: 1
-			msg: 'No org'
+			ret =
+				err: 1
+				msg: 'No org'
 		rsp.send ret
 
 	checkPsd: (req, rsp) ->

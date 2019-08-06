@@ -4,9 +4,8 @@ smtpTransport = require('nodemailer-smtp-transport')
 transPool = (email, host, psd)->
 	_ePool[email] ?= nodemailer.createTransport smtpTransport
 		host: host
-		port: 2525
-		secure: false
-		ignoreTLS: true
+		port: 465
+		secureConnection: true
 		auth:
 			user: email
 			pass: psd

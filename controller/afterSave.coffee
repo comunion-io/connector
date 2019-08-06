@@ -1,7 +1,8 @@
 mailOpt =
-	email: 'postmaster@comunion.io'
-	mailHost: 'mail.comunion.io'
-	mailPsd: '7Sn7TPoEzePmn7ze'
+	email: 'service@comunion.io'
+	mailHost: 'smtp.exmail.qq.com'
+	mailPsd: 'RjZoofwvjpamFk89'
+	name: 'Comunion Website'
 
 gStub.comunion =
 	sendPsdEmail: (req, item)->

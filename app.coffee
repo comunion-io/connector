@@ -127,7 +127,6 @@ initDb = ->
 		for it in v
 			dao.index db, k, it.prop, it.opt
 
-
 initDb()
 app.use '/', require('./route/prod')
 require './controller/afterSave'

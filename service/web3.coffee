@@ -1,9 +1,11 @@
 Web3 = require('web3')
 
+phash = 'ropsten.infura.io/v3/11ae2b7ff4c04391b71dd5a196c21b0d'
+
 if web3?
 	web3 = new Web3(web3.currentProvider)
 else
-	web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.etherscan.io/address/0xfa374fb3a47285dd62244eb8e72a4167339560eb"))
+	web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/11ae2b7ff4c04391b71dd5a196c21b0d"))
 
 module.exports =
 
@@ -23,7 +25,6 @@ module.exports =
 
 	checkTran: (hash) ->
 		try
-			log 'call'
-			log res = await web3.eth.getTransaction(hash)
+			await web3.eth.getTransaction(hash)
 		catch e
 			log e
