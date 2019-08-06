@@ -135,9 +135,11 @@ module.exports = ->
 		delete opt._id
 		try
 			doc = await gEnt(db, entity).findOneAndUpdate filter, opt, {upsert: true, returnOriginal: false}
-			item = doc.value
-			callback?(item)
-			item
+			if item = doc.value
+				callback?(item)
+				item
+			else
+				null
 		catch e
 			log e
 

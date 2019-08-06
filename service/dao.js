@@ -232,11 +232,14 @@ module.exports = function() {
         upsert: true,
         returnOriginal: false
       }));
-      item = doc.value;
-      if (typeof callback === "function") {
-        callback(item);
+      if (item = doc.value) {
+        if (typeof callback === "function") {
+          callback(item);
+        }
+        return item;
+      } else {
+        return null;
       }
-      return item;
     } catch (error) {
       e = error;
       return log(e);
