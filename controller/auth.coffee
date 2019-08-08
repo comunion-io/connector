@@ -39,6 +39,13 @@ module.exports =
 			errAuth req, rsp
 			return
 
+	sendVCode: (req, rsp) ->
+		sStr = pug.renderFile "#{_path}/view/tmpl/regDone.pug", opt
+		sEmail setting.email,
+			to: item.email
+			subject: 'Congratulations，registered Comunion successfully'
+			html: sStr
+			text: 'Comunion'
 
 	logout: (req, rsp) ->
 		if req.cookies._ncs_

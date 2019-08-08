@@ -52,6 +52,16 @@ module.exports = {
       errAuth(req, rsp);
     }
   },
+  sendVCode: function(req, rsp) {
+    var sStr;
+    sStr = pug.renderFile(`${_path}/view/tmpl/regDone.pug`, opt);
+    return sEmail(setting.email, {
+      to: item.email,
+      subject: 'Congratulations，registered Comunion successfully',
+      html: sStr,
+      text: 'Comunion'
+    });
+  },
   logout: function(req, rsp) {
     if (req.cookies._ncs_) {
       cms.del(req, rsp);

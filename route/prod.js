@@ -79,6 +79,10 @@ router.delete('/r/:entity/:id', data.del);
 
 router.delete('/r/:entity', data.del);
 
+router.get('/upload', function(req, rsp) {
+  return rsp.render('upload.pug');
+});
+
 //do ->
 //	sStr = pug.renderFile("#{_path}/view/tmpl/regDone.pug", psd: '123')
 
@@ -97,4 +101,6 @@ router.delete('/r/:entity', data.del);
 //		log e
 //web3 = require '../service/web3'
 //web3.checkTran('0x8c13609f51466873eb283133ac952805155e1947db0a94a0ed7acb65b340c39f')
+require('../controller/upload');
+
 module.exports = router;

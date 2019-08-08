@@ -1,8 +1,3 @@
-mailOpt =
-	email: 'service@comunion.io'
-	mailHost: 'smtp.exmail.qq.com'
-	mailPsd: 'RjZoofwvjpamFk89'
-	name: 'Comunion Website'
 
 gStub.comunion =
 	sendPsdEmail: (req, item)->
@@ -17,7 +12,7 @@ gStub.comunion =
 
 		sStr = pug.renderFile "#{_path}/view/tmpl/regDone.pug", opt
 
-		sEmail mailOpt,
+		sEmail setting.email,
 			to: item.email
 			subject: 'Congratulations，registered Comunion successfully'
 			html: sStr
