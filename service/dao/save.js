@@ -39,9 +39,7 @@ module.exports = async function(code, entity, reg) {
         ref1 = after.split(',');
         for (k = 0, len2 = ref1.length; k < len2; k++) {
           it = ref1[k];
-          log('fiuck');
-          log(code);
-          log(func = gs(code, it));
+          func = gs(code, it);
           await func(reg, s);
         }
       }

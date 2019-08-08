@@ -194,6 +194,4 @@ app.use('/', require('./route/prod'));
 
 require('./controller/afterSave');
 
-log(gStub);
-
 module.exports = app;

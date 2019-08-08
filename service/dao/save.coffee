@@ -26,9 +26,7 @@ module.exports = (code, entity, reg)->
 			queryUtil.afterPersist(s, entity)
 			if after
 				for it in after.split(',')
-					log 'fiuck'
-					log code
-					log func = gs(code, it)
+					func = gs(code, it)
 					await func(reg, s)
 
 		if item.length is 1

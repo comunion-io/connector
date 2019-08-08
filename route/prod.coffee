@@ -28,12 +28,25 @@ actPre = (req, rsp, next)->
 router.all '/a/*', actPre
 router.all '/r/*', actPre
 
+router.post '/a/*', (req, rsp, next)->
+	bo = req.body
+	if bo._cCode
+		if (rs = _cache.get(bo._cCode)) and (rs is bo._vCode)
+			next()
+		else
+			rsp.json
+				err: 1
+				msg: 'verifyCodeErr'
+	else
+		next()
+
 router.get '/a/auth/check/now', auth.check
 router.post '/a/auth/login', auth.login
 router.post '/a/auth/logout', auth.logout
 router.post '/a/auth/resetPsd', auth.resetPsd
 router.post '/a/auth/checkPsd', auth.checkPsd
 router.post '/a/auth/register', auth.register, data.save
+router.post '/a/verifyCode', auth.verifyCode
 
 router.get '/a/org/orgStatus/:id', auth.orgStatus
 

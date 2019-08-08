@@ -242,8 +242,6 @@ _.extend Array::,
 
 		while i < @length
 			if @[i][prop] == val
-				log item
-				log i
 				@[i] = item
 			i++
 		return

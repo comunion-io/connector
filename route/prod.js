@@ -39,6 +39,23 @@ router.all('/a/*', actPre);
 
 router.all('/r/*', actPre);
 
+router.post('/a/*', function(req, rsp, next) {
+  var bo, rs;
+  bo = req.body;
+  if (bo._cCode) {
+    if ((rs = _cache.get(bo._cCode)) && (rs === bo._vCode)) {
+      return next();
+    } else {
+      return rsp.json({
+        err: 1,
+        msg: 'verifyCodeErr'
+      });
+    }
+  } else {
+    return next();
+  }
+});
+
 router.get('/a/auth/check/now', auth.check);
 
 router.post('/a/auth/login', auth.login);
@@ -50,6 +67,8 @@ router.post('/a/auth/resetPsd', auth.resetPsd);
 router.post('/a/auth/checkPsd', auth.checkPsd);
 
 router.post('/a/auth/register', auth.register, data.save);
+
+router.post('/a/verifyCode', auth.verifyCode);
 
 router.get('/a/org/orgStatus/:id', auth.orgStatus);
 

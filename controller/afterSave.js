@@ -18,6 +18,7 @@ gStub.comunion = {
   },
   afterSaveOrg: async function(req, item) {
     var $push, code, e, email, opt, psd, sStr, type, u, username;
+    log(item);
     code = req.c.code;
     try {
       psd = util.randomChar(5);
@@ -57,8 +58,8 @@ gStub.comunion = {
         username: username
       };
       sStr = pug.renderFile(`${_path}/view/tmpl/regDone.pug`, opt);
-      return sEmail(mailOpt, {
-        to: item.email,
+      return sEmail(setting.email, {
+        to: email,
         subject: 'Congratulations，registered Comunion successfully',
         html: sStr,
         text: 'Comunion'

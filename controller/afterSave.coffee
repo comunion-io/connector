@@ -18,8 +18,8 @@ gStub.comunion =
 			html: sStr
 			text: 'Comunion'
 
-
 	afterSaveOrg: (req, item)->
+		log item
 		code = req.c.code
 		try
 			psd = util.randomChar(5)
@@ -51,13 +51,11 @@ gStub.comunion =
 				type: type
 				username: username
 			sStr = pug.renderFile "#{_path}/view/tmpl/regDone.pug", opt
-
-			sEmail mailOpt,
-				to: item.email
+			sEmail setting.email,
+				to: email
 				subject: 'Congratulations，registered Comunion successfully'
 				html: sStr
 				text: 'Comunion'
-
 		catch e
 			throw e
 

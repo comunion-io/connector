@@ -1,11 +1,11 @@
 h2 Hello #{username}
 
 if type == 'newOrgUser'
-    p Welcome to Comunion!  Congratulations, you have successfully completed the organization registration! The initial password is: #{psd}. You can use your email and initial password to login, and manage your organization, you also can reset your login password.
+    p Welcome to Comunion!  Congratulations, you have successfully completed the organization registration! The initial password is: #[b #{psd}]. You can use your email and initial password to login, and manage your organization, you also can reset your login password.
 else if type == 'oldOrgUser'
-    p Welcome to Comunion!  Congratulations, you have successfully add to the organization #{orgName}!
+    p Welcome to Comunion!  Congratulations, you have successfully add to the organization #[b #{orgName}]!
 else if type == 'newUser'
-    p You are registering at Comunion. Your verification code is #{psd}. The verification code is valid within 30 minutes.
+    p You are registering at Comunion. Your verification code is #[b #{psd}]. The verification code is valid within 30 minutes.
 else if type == 'resetPsd'
     p You are resetting your password. Your verification code is #{psd}. The verification code is valid within 30 minutes.
 

@@ -76,6 +76,38 @@ Content-Type: application/json
   "password": "psd1"
 }
 `
+###发送邮件验证码
+POST /a/verifyCode
+
+参数：
+
+`
+{
+  "email": "email@123.com",
+  "username(可选)": "username"
+}
+`
+
+返回:
+
+`
+{
+  "cCode": "xxxxx"
+}
+`
+
+注意：再次提交数据时，请加入下面两个属性：
+
+`
+{
+  "_cCode": "上面返回的cCode",
+  "_vCode": "查看邮件里的验证码"
+}
+`
+
+如果验证不通过，返回err与msg
+
+
 ###检查密码
 POST /a/auth/checkPsd
 

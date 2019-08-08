@@ -19,12 +19,13 @@ module.exports =
 		rsp.send user: req.session
 
 	login: (req, rsp) ->
-		bo = req.body
+		log bo = req.body
 		opt = if bo.email
 			email: bo.email
 		else
 			username: bo.username
-		if user = await dao.get(code, 'user', opt)
+
+		if bo.password and (user = await dao.get(code, 'user', opt))
 			if bo._en
 				if user.password isnt bo.password
 					errAuth req, rsp
@@ -39,13 +40,31 @@ module.exports =
 			errAuth req, rsp
 			return
 
-	sendVCode: (req, rsp) ->
-		sStr = pug.renderFile "#{_path}/view/tmpl/regDone.pug", opt
-		sEmail setting.email,
-			to: item.email
-			subject: 'Congratulations，registered Comunion successfully'
-			html: sStr
-			text: 'Comunion'
+	verifyCode: (req, rsp) ->
+		bo = req.body
+		if !bo.email
+			rsp.json
+				err: 1
+				msg: 'No email'
+		else
+			cCode = util.randomChar(15)
+			vCode = util.randomChar(5)
+			s = 1000 * 60 * 30
+			_cache.set cCode, vCode, s
+
+			sStr = pug.renderFile "#{_path}/view/tmpl/regDone.pug",
+				username: bo.username
+				type: 'resetPsd'
+				psd: vCode
+
+			sEmail bo.email,
+				to: item.email
+				subject: 'Verify Code'
+				html: sStr
+				text: 'Comunion'
+
+			rsp.json {cCode}
+
 
 	logout: (req, rsp) ->
 		if req.cookies._ncs_

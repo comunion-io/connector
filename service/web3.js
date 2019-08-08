@@ -8,7 +8,7 @@ phash = 'ropsten.infura.io/v3/11ae2b7ff4c04391b71dd5a196c21b0d';
 if (typeof web3 !== "undefined" && web3 !== null) {
   web3 = new Web3(web3.currentProvider);
 } else {
-  web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/11ae2b7ff4c04391b71dd5a196c21b0d"));
+  web3 = new Web3(new Web3.providers.HttpProvider(setting.web3Address));
 }
 
 module.exports = {

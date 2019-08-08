@@ -323,8 +323,6 @@ _.extend(Array.prototype, {
     i = 0;
     while (i < this.length) {
       if (this[i][prop] === val) {
-        log(item);
-        log(i);
         this[i] = item;
       }
       i++;
