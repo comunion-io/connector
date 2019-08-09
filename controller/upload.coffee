@@ -10,14 +10,16 @@ s3 = new aws.S3({
 	endpoint: spacesEndpoint
 })
 
+bk = 'comunion-avatar'
+
 upload = multer(
 	storage: multerS3
 		s3: s3
-		bucket: 'comunion-avatar'
+		bucket: bk
 		acl: 'public-read'
-		key: (request, file, cb) ->
-			console.log(file);
-			cb(null, file.originalname)
+		key: (req, file, cb) ->
+			req.fk = 'avatar_' + util.randomChar(9) + '.' + file.originalname.split('.')[1]
+			cb(null, req.fk)
 ).array('upload', 1)
 
 app.post '/a/upload', (req, rsp) ->
@@ -29,4 +31,7 @@ app.post '/a/upload', (req, rsp) ->
 				msg: 'upload err'
 		else
 			log('File uploaded successfully.')
-			rsp.json msg: 'upload successfully'
+			log "http://#{bk}.sgp1.digitaloceanspaces.com/#{req.fk}"
+			rsp.json
+				msg: 'upload successfully'
+				url: "http://#{bk}.sgp1.digitaloceanspaces.com/#{req.fk}"

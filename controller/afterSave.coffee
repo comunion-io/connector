@@ -19,7 +19,6 @@ gStub.comunion =
 			text: 'Comunion'
 
 	afterSaveOrg: (req, item)->
-		log item
 		code = req.c.code
 		try
 			psd = util.randomChar(5)

@@ -57,8 +57,8 @@ module.exports =
 				type: 'resetPsd'
 				psd: vCode
 
-			sEmail bo.email,
-				to: item.email
+			sEmail setting.email,
+				to: bo.email
 				subject: 'Verify Code'
 				html: sStr
 				text: 'Comunion'

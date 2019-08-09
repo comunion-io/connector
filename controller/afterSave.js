@@ -18,7 +18,6 @@ gStub.comunion = {
   },
   afterSaveOrg: async function(req, item) {
     var $push, code, e, email, opt, psd, sStr, type, u, username;
-    log(item);
     code = req.c.code;
     try {
       psd = util.randomChar(5);
