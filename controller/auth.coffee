@@ -73,6 +73,10 @@ module.exports =
 
 	register: (req, rsp, next) ->
 		bo = req.body
+		unless bo.email
+			rsp.send
+				err: 1
+				msg: '数据错误'
 		unless bo.username
 			rsp.send
 				err: 1

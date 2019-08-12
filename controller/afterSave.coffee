@@ -37,6 +37,7 @@ gStub.comunion =
 				type = 'newOrgUser'
 				await dao.save code, 'user',
 					email: email
+					username: email
 					password: util.sha256(psd)
 					orgs: [
 						_id:  item._id

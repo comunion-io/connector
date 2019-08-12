@@ -90,6 +90,12 @@ module.exports = {
   register: function(req, rsp, next) {
     var bo;
     bo = req.body;
+    if (!bo.email) {
+      rsp.send({
+        err: 1,
+        msg: '数据错误'
+      });
+    }
     if (!bo.username) {
       rsp.send({
         err: 1,
