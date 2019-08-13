@@ -77,15 +77,17 @@ module.exports =
 			rsp.send
 				err: 1
 				msg: '数据错误'
+			return
 		unless bo.username
 			rsp.send
 				err: 1
 				msg: '数据错误'
+			return
 		unless bo.password
 			rsp.send
 				err: 1
 				msg: '数据错误'
-
+			return
 		req.entity = 'user'
 		req.password = bo.password
 		bo.password = util.sha256(bo.password)

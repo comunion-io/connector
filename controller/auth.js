@@ -95,18 +95,21 @@ module.exports = {
         err: 1,
         msg: '数据错误'
       });
+      return;
     }
     if (!bo.username) {
       rsp.send({
         err: 1,
         msg: '数据错误'
       });
+      return;
     }
     if (!bo.password) {
       rsp.send({
         err: 1,
         msg: '数据错误'
       });
+      return;
     }
     req.entity = 'user';
     req.password = bo.password;
