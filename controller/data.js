@@ -183,7 +183,7 @@ dataController = {
         $set: so
       };
     }
-    return dao.update(code, entity, queryUtil.queryClean(bo.q), queryUtil.queryClean(so), function(d) {
+    return dao.update(code, entity, bo.q, queryUtil.queryClean(so), function(d) {
       return rsp.send({
         msg: 'm_update_ok',
         entity: _.pick(d, '_id', '_e', bo.prop)

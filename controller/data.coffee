@@ -135,8 +135,10 @@ dataController =
 		if (so = bo.op) and !so.$set
 			so =
 				$set: so
-		dao.update code, entity, queryUtil.queryClean(bo.q), queryUtil.queryClean(so), (d)->
+		dao.update code, entity, bo.q, queryUtil.queryClean(so), (d)->
 			rsp.send(msg: 'm_update_ok', entity: _.pick(d, '_id', '_e', bo.prop))
+
+
 
 	delSub: (req, rsp)->
 		code = req.c.code

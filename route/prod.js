@@ -88,6 +88,8 @@ router.get('/r/:entity/:q/:qv/:prop', data.getSub);
 
 router.get('/r/:entity/:key/:val', data.getByKey);
 
+router.post('/a/update/:entity', data.editSub);
+
 router.put('/r/:entity/:id', data.edit);
 
 router.patch('/r/:entity/:id', data.edit);

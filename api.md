@@ -186,6 +186,23 @@ Content-Type: application/json
 }
 `
 
+### 组织成员修改
+POST '/a/update/org'
+
+参数
+`
+{
+  q: {
+    _id: 'org Id',
+    'members.email': '邮箱地址'
+  },
+  op: {
+    role: 'role',
+    description: 'description'
+  }
+}
+`
+
 ### 查询组织
 
 #### 查询列表
