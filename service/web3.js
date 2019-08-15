@@ -30,7 +30,7 @@ module.exports = {
   checkTran: async function(hash) {
     var e;
     try {
-      return (await web3.eth.getTransaction(hash));
+      return (await web3.eth.getTransactionReceipt(hash));
     } catch (error) {
       e = error;
       return log(e);

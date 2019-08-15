@@ -120,8 +120,6 @@ router.get('/upload', function(req, rsp) {
 //			html: sStr
 //	catch e
 //		log e
-//web3 = require '../service/web3'
-//web3.checkTran('0x8c13609f51466873eb283133ac952805155e1947db0a94a0ed7acb65b340c39f')
 require('../controller/upload');
 
 module.exports = router;

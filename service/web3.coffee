@@ -25,6 +25,6 @@ module.exports =
 
 	checkTran: (hash) ->
 		try
-			await web3.eth.getTransaction(hash)
+			await web3.eth.getTransactionReceipt(hash)
 		catch e
 			log e

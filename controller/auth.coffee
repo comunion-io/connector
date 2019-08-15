@@ -13,6 +13,13 @@ errAuth = (req, rsp)->
 		msg: 'm_login_f'
 		toUrl: req.body.toUrl
 
+#setTimeout ->
+#	log '123'
+#	res = await web3.checkTran('0x8c13609f51466873eb283133ac952805155e1947db0a94a0ed7acb65b340c39f')
+#	log res
+#	log 'zzzzzz'
+#, 5000
+
 module.exports =
 
 	check: (req, rsp) ->
@@ -142,3 +149,4 @@ module.exports =
 		else
 			rsp.send
 				msg: '验证成功'
+
