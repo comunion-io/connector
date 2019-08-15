@@ -197,8 +197,8 @@ POST '/a/update/org'
     'members.email': '邮箱地址'
   },
   op: {
-    role: 'role',
-    description: 'description'
+    'members.$.role': 'role',
+    'members.$.description': 'description'
   }
 }
 `
@@ -259,4 +259,17 @@ GET http://178.128.221.42:3000/r/org/name/sdfs
 
 DELETE http://localhost:3000/r/org/5d2e9e38722d9b223ee09b0e
 
+### 查询多个用户
+GET http://178.128.221.42:3000/r/user
 
+参数与
+`
+{
+  q: {
+    _id: {
+      $in: ['55e9f612a62bd1e611277993', '55e9f612a62bd1e611277992']
+    }
+  }
+}
+ 
+`
