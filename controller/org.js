@@ -14,6 +14,7 @@ module.exports = {
           _id: it._id
         }));
         if (u) {
+          delete u.password;
           _.extend(org.members[idx], u);
         }
       }

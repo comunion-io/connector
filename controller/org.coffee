@@ -6,6 +6,7 @@ module.exports =
 			for it,idx in org.members
 				u = await dao.one code, 'user', _id: it._id
 				if u
+					delete u.password
 					_.extend org.members[idx], u
 			rsp.send entities: org.members
 		catch e
