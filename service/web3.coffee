@@ -1,7 +1,5 @@
 Web3 = require('web3')
 
-phash = 'ropsten.infura.io/v3/11ae2b7ff4c04391b71dd5a196c21b0d'
-
 if web3?
 	web3 = new Web3(web3.currentProvider)
 else

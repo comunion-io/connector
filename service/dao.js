@@ -61,6 +61,34 @@ module.exports = function() {
       return results;
     }
   };
+  this.one = async function(db, ent, filter, callback) {
+    var doc, e, opt;
+    opt = {};
+    if (filter.projection) {
+      opt = {
+        projection: util.d(filter, 'projection')
+      };
+    }
+    if (!filter.sort) {
+      opt.sort = {
+        lastUpdated: -1
+      };
+    }
+    filter = this.cleanOpt(filter);
+    try {
+      doc = (await gEnt(db, ent).findOne(filter, opt));
+      if (doc) {
+        doc._e = ent;
+      }
+      if (typeof callback === "function") {
+        callback(doc);
+      }
+      return doc;
+    } catch (error) {
+      e = error;
+      return log(e);
+    }
+  };
   this.get = async function(db, ent, filter, callback) {
     var doc, e, opt;
     opt = {};

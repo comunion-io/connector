@@ -2,6 +2,7 @@ router = require('express').Router()
 
 auth = require '../controller/auth'
 data = require '../controller/data'
+org = require '../controller/org'
 
 log authStr = db + ':test'
 
@@ -56,7 +57,7 @@ router.get '/r/userRank/:entity/:key/:val/:prop', data.userRank
 router.get '/r/count/:entity', data.count
 router.get '/r/:entity', data.list
 router.get '/r/:entity/:id', data.get
-router.get '/r/:entity/:q/:qv/:prop', data.getSub
+#router.get '/r/:entity/:q/:qv/:prop', data.getSub
 router.get '/r/:entity/:key/:val', data.getByKey
 
 router.post '/a/update/:entity', data.editSub
@@ -66,6 +67,9 @@ router.patch '/r/:entity/:id', data.edit
 router.post '/r/:entity', data.save
 router.delete '/r/:entity/:id', data.del
 router.delete '/r/:entity', data.del
+
+router.get '/r/org/info/members/:id', org.membersInfo
+
 
 router.get '/upload', (req, rsp)->
 	rsp.render 'upload.pug'

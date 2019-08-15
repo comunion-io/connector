@@ -40,6 +40,22 @@ module.exports = ->
 			for it in Ent.getIndexes()
 				Ent.dropIndex opt
 
+	@one = (db, ent, filter, callback)->
+		opt = {}
+		if filter.projection
+			opt =
+				projection: util.d filter, 'projection'
+		unless filter.sort
+			opt.sort =
+				lastUpdated: -1
+		filter = @cleanOpt(filter)
+		try
+			doc = await gEnt(db, ent).findOne filter, opt
+			doc._e = ent if doc
+			callback?(doc)
+			doc
+		catch e
+			log e
 	@get = (db, ent, filter, callback)->
 		opt = {}
 		if filter.projection
