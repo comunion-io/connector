@@ -152,15 +152,21 @@ module.exports = {
       _id: oid(req.params.id)
     }))) {
       rw = (await web3.checkTran(org.hash));
-      ret = rw.blockNumber ? ($set = {
-        status: 2
-      }, dao.findAndUpdate(code, 'org', {
-        _id: org._id
-      }, {$set}), {
-        status: 2
-      }) : {
-        status: 1
-      };
+      if (rw && rw.blockNumber) {
+        $set = {
+          status: 2
+        };
+        dao.findAndUpdate(code, 'org', {
+          _id: org._id
+        }, {$set});
+        ret = {
+          status: 2
+        };
+      } else {
+        ret = {
+          status: 1
+        };
+      }
     } else {
       ret = {
         err: 1,

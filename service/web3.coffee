@@ -1,11 +1,12 @@
 Web3 = require('web3')
 
-if web3?
-	web3 = new Web3(web3.currentProvider)
-else
-	web3 = new Web3(new Web3.providers.HttpProvider(setting.web3Address))
-
 module.exports =
+
+	web3: ->
+		if web3?
+			web3 = new Web3(web3.currentProvider)
+		else
+			web3 = new Web3(new Web3.providers.HttpProvider(setting.web3Address))
 
 	getContract: (abiFile, addr)->
 		abi = JSON.parse(fs.readFileSync(abiFile))

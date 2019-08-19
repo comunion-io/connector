@@ -122,12 +122,14 @@ module.exports =
 		code = req.c.code
 		if org = await dao.get code, 'org', _id: oid(req.params.id)
 			rw = await web3.checkTran(org.hash)
-			ret = if rw.blockNumber
+			if rw and rw.blockNumber
 				$set = status: 2
 				dao.findAndUpdate code, 'org', {_id: org._id}, {$set}
-				status: 2
+				ret =
+					status: 2
 			else
-				status: 1
+				ret =
+					status: 1
 		else
 			ret =
 				err: 1
