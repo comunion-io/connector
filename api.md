@@ -44,51 +44,57 @@
 
 v1.0
 
-> **Notice: 缺少:entity列表，需要补充数据库信息**
+- 获取组织列表信息
 
-- 获取实例列表信息
+```get /r/org```
 
-```get /r/:entity```
+- 获取组织总数
 
-- 获取实例总个事
+```get /r/count/org```
 
-```get /r/count/:entity```
+- 根据ID获取组织信息
 
-- 获取单个实例信息
+```get /r/org/:id```
 
-```get /r/:entity/:id```
+- 根据名字获取组织信息
 
-- 根据实例的某个key的值查询信息
+```get /r/org/name/:val```
 
-```get /r/:entity/:key/:val```
+- 创建组织
 
-- 创建实例
+```post /r/org```
 
-```post /r/:entity```
-
-- 修改单个实例信息
+- 根据ID修改组织信息
   
-```put /r/:entity/:id```
+```put /r/org/:id```
 
-- 删除单个实例
+- 获取用户列表信息
 
-```delete /r/:entity/:id```
+```get /r/member```
 
-- 聚合查询
+- 获取用户总数
 
-```/r/agg/:entity``` 
+```get /r/count/member```
 
----
+- 根据ID获取用户信息
 
-> **Notice: 如下接口是否有必要**
+```get /r/member/:id```
 
-```delete /r/:entity``` 直接删库？
-```get /r/org/info/members/:id``` 通过如上接口无法实现？
-```patch /r/:entity/:id``` 和前面put接口是否重复？
-```post /a/update/:entity``` editSub是什么行为，和patch的edit有何区别?
-```/r/comp``` comp是做什么的？
-```/r/userRank/:entity/:key/:val/:prop``` userRank是做什么的？
-接口权限如何界定？
+- 根据名字获取用户信息
+
+```get /r/member/name/:val```
+
+- 根据ID修改组织信息
+
+```put /r/member/:id```
+
+- 根据组织ID获取转账信息
+
+```get /r/org/record/:ord_id```
+
+- 创建组织转账信息
+
+```post /r/org/record```
 
 ---
 
@@ -137,11 +143,17 @@ v1.0
 
 ```post /a/auth/resetPsd```
 
+- 检测用户是否处于登录状态
+  
+```post /a/auth/check/now```
 
-> **Notice: 如下接口是否有必要**
-
-```post /a/auth/check/now``` 做什么用？
+- 检测密码是否正确
+  
 ```post /a/auth/checkPsd``` 何时需要单独验证密码？
+
+- 记录remark信息
+
+```post /a/remark/:txhash/:remark```
 
 ---
 
