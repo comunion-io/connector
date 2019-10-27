@@ -17,6 +17,7 @@ org: 组织对象
 |members|组织成员 DBRef|[user_id, user_id, ...]|
 |email|创建者邮箱|"xxx@comunion.io"|
 |wallet|创建者钱包 **在v2.0仅支持账户钱包一一绑定**|[{"name":"eth", "value":"0xd7f22d785913db334f9adad38cf0a5538ad423e9"}]|
+|vault|代币合约地址|"0xd7f22d785913db334f9adad38cf0a5538ad423e9"|
 |finance|财务子钱包|[{"name": "eth", "value": "0xd7f22d785913db334f9adad38cf0a5538ad423e9", "budget": 1000000, "usage": "salary"}, ...]|
 |contract|组织合约地址|"0xd7f22d785913db334f9adad38cf0a5538ad423e9"|
 |lastUpdated|组织上次更新时间|1570972336432|
