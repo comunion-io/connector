@@ -33,10 +33,10 @@ dataController =
 		await dao.remove req.c.code, bo.ent, bo.q
 		rsp.send msg: 'm_del_ok'
 
-	del: (req, rsp) ->
-		req.id = req.params.id
-		res = await del req.c.code, req.params.entity, req
-		rsp.send res
+	# del: (req, rsp) ->
+	# 	req.id = req.params.id
+	# 	res = await del req.c.code, req.params.entity, req
+	# 	rsp.send res
 
 	edit: (req, rsp) ->
 		req.id = req.params.id
@@ -47,32 +47,32 @@ dataController =
 		ret = await save req.c.code, req.params.entity || req.entity, req
 		rsp.send ret
 
-	comp: (req, rsp) ->
-		opt = {}
-		code = req.c.code
-		for k,v of req.query
-			if k.indexOf('_')
-				[entity, limit] = k.split('_')
-				opt[entity] = do(entity, limit, v)->
-					(cb)->
-						op =
-							skip: 0
-							limit: limit
-							sort:
-								lastUpdated: -1
-							projection:
-								title: 1
-								brief: 1
-								lastUpdated: 1
-								refFile: 1
-								list: 1
-						if v.status
-							v.status = +v.status
-						dao.find code, entity, v, op, (res)->
-							cb(null, res)
+	# comp: (req, rsp) ->
+	# 	opt = {}
+	# 	code = req.c.code
+	# 	for k,v of req.query
+	# 		if k.indexOf('_')
+	# 			[entity, limit] = k.split('_')
+	# 			opt[entity] = do(entity, limit, v)->
+	# 				(cb)->
+	# 					op =
+	# 						skip: 0
+	# 						limit: limit
+	# 						sort:
+	# 							lastUpdated: -1
+	# 						projection:
+	# 							title: 1
+	# 							brief: 1
+	# 							lastUpdated: 1
+	# 							refFile: 1
+	# 							list: 1
+	# 					if v.status
+	# 						v.status = +v.status
+	# 					dao.find code, entity, v, op, (res)->
+	# 						cb(null, res)
 
-		async.parallel opt, (err, res)->
-			rsp.send res
+	# 	async.parallel opt, (err, res)->
+	# 		rsp.send res
 
 	inc: (req, rsp)->
 		op =
@@ -128,15 +128,15 @@ dataController =
 			log 'clean Cache...'
 			rsp.send msg: 'm_del_ok'
 
-	editSub: (req, rsp)->
-		code = req.c.code
-		entity = req.params.entity
-		bo = req.body
-		if (so = bo.op) and !so.$set
-			so =
-				$set: so
-		dao.update code, entity, bo.q, queryUtil.queryClean(so), (d)->
-			rsp.send(msg: 'm_update_ok', entity: _.pick(d, '_id', '_e', bo.prop))
+	# editSub: (req, rsp)->
+	# 	code = req.c.code
+	# 	entity = req.params.entity
+	# 	bo = req.body
+	# 	if (so = bo.op) and !so.$set
+	# 		so =
+	# 			$set: so
+	# 	dao.update code, entity, bo.q, queryUtil.queryClean(so), (d)->
+	# 		rsp.send(msg: 'm_update_ok', entity: _.pick(d, '_id', '_e', bo.prop))
 
 
 
@@ -198,23 +198,23 @@ dataController =
 		catch e
 			log e
 
-	userRank: (req, rsp)->
-		code = req.c.code
-		pa = req.params
+	# userRank: (req, rsp)->
+	# 	code = req.c.code
+	# 	pa = req.params
 
-		ent = pa.entity
-		q = {}
-		q[pa.key] = pa.val
-		dao.get code, ent, q, (res)->
-			if res
-				qq = {}
-				qq[pa.prop] =
-					$lt: util.seqProp(res, pa.prop)
-				dao.count code, ent, qq, (count)->
-					res.rankNum = count
-					rsp.send res
-			else
-				rsp.send msg: 'm_find_no'
+	# 	ent = pa.entity
+	# 	q = {}
+	# 	q[pa.key] = pa.val
+	# 	dao.get code, ent, q, (res)->
+	# 		if res
+	# 			qq = {}
+	# 			qq[pa.prop] =
+	# 				$lt: util.seqProp(res, pa.prop)
+	# 			dao.count code, ent, qq, (count)->
+	# 				res.rankNum = count
+	# 				rsp.send res
+	# 		else
+	# 			rsp.send msg: 'm_find_no'
 
 	count: (req, rsp)->
 		code = req.c.code

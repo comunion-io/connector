@@ -3,6 +3,7 @@ code = app.db
 web3 = require '../service/web3'
 
 afterAuth = (user, req, rsp)->
+	cms.set(req, rsp, user)
 	rsp.send
 		user: user
 		msg: 'm_login_s'

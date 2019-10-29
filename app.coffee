@@ -3,6 +3,7 @@ global.express = require('express')
 cookieParser = require('cookie-parser')
 bodyParser = require('body-parser')
 EventEmitter = require('events').EventEmitter
+cors = require('cors')
 
 global._ = require('underscore')
 global._path = __dirname
@@ -102,6 +103,7 @@ app.set 'view engine', 'pug'
 app.set 'views', path.join(_path, "public")
 # app.use(favicon(__dirname + '/public/favicon.ico'))
 
+app.use cors()
 app.use bodyParser.json()
 app.use bodyParser.urlencoded(extended: false)
 app.use cookieParser()

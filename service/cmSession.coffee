@@ -1,5 +1,7 @@
 module.exports =
 	set: (req, rsp, user, maxAge = Date.day)->
+		token = util.randomChar(32)
+		user.token = token
 		rsp.cookie "_ncs_", user._id, maxAge: maxAge
 		dao.save req.c.code, 'session:_id', user
 
@@ -8,7 +10,7 @@ module.exports =
 
 	get: (req, rsp)->
 		if ncs = req.cookies._ncs_
-			ret = await gEnt(req.c.code, 'session').findOne _id: oid(ncs)
+			ret = await gEnt(req.c.code, 'session').findOne token: ncs
 			if ret
 				req.session = ret
 			else
@@ -30,3 +32,10 @@ module.exports =
 				next()
 			else
 				rsp.status(360).json msg: '请重新登录', toUrl: 'signin'
+
+	requiredUser: (req, rsp, next)->
+		if (u = req.session) and u.email == req.body.email
+				next()
+			else
+				rsp.status 390
+				rsp.send msg: '用户权限错误'

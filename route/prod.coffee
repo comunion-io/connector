@@ -12,8 +12,10 @@ actPre = (req, rsp, next)->
 	req.c =
 		code: db
 #		url: 'test'
+	# console.log("actPre:", req.cookies)
 	if true or app.env
 		req.cookies._ncs_ and await cms.get(req, rsp)
+		# console.log("session:", req.session)
 		next()
 		return
 	if hd.host isnt req.c.url
@@ -28,6 +30,8 @@ actPre = (req, rsp, next)->
 
 router.all '/a/*', actPre
 router.all '/r/*', actPre
+
+router.put '/r/*', cms.requiredUser
 
 router.post '/a/*', (req, rsp, next)->
 	bo = req.body
@@ -51,22 +55,22 @@ router.post '/a/verifyCode', auth.verifyCode
 
 router.get '/a/org/orgStatus/:id', auth.orgStatus
 
-router.get '/r/comp', data.comp
+# router.get '/r/comp', data.comp
 router.get '/r/agg/:entity', data.agg
-router.get '/r/userRank/:entity/:key/:val/:prop', data.userRank
+# router.get '/r/userRank/:entity/:key/:val/:prop', data.userRank
 router.get '/r/count/:entity', data.count
 router.get '/r/:entity', data.list
 router.get '/r/:entity/:id', data.get
 #router.get '/r/:entity/:q/:qv/:prop', data.getSub
 router.get '/r/:entity/:key/:val', data.getByKey
 
-router.post '/a/update/:entity', data.editSub
+# router.post '/a/update/:entity', data.editSub
 
 router.put '/r/:entity/:id', data.edit
-router.patch '/r/:entity/:id', data.edit
+# router.patch '/r/:entity/:id', data.edit
 router.post '/r/:entity', data.save
-router.delete '/r/:entity/:id', data.del
-router.delete '/r/:entity', data.del
+# router.delete '/r/:entity/:id', data.del
+# router.delete '/r/:entity', data.del
 
 router.get '/r/org/info/members/:id', org.membersInfo
 
