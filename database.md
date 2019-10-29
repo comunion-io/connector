@@ -18,7 +18,7 @@ org: 组织对象
 |email|创建者邮箱|"xxx@comunion.io"|
 |wallet|创建者钱包 **在v2.0仅支持账户钱包一一绑定**|[{"name":"eth", "value":"0xd7f22d785913db334f9adad38cf0a5538ad423e9"}]|
 |icon|代币icon|""http://comunion-avatar.sgp1.digitaloceanspaces.com/xxx""|
-|token|代币信息|{"contract:": "0xd7f22d785913db334f9adad38cf0a5538ad423e9", "name": "Comunion Token", "symbol": "UVU", "decimal": 8, "supply": 100000000}|
+|asset|代币信息|{"contract:": "0xd7f22d785913db334f9adad38cf0a5538ad423e9", "name": "Comunion Token", "symbol": "UVU", "decimal": 8, "supply": 100000000}|
 |finance|财务子钱包|[{"name": "eth", "value": "0xd7f22d785913db334f9adad38cf0a5538ad423e9", "budget": 1000000, "usage": "salary"}, ...]|
 |contract|组织合约地址|"0xd7f22d785913db334f9adad38cf0a5538ad423e9"|
 |lastUpdated|组织上次更新时间|1570972336432|
