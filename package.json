@@ -21,6 +21,7 @@
     "cheerio": "^1.0.0-rc.2",
     "coffeescript": "^2.3.2",
     "compression": "^1.7.1",
+    "comunion-dao": "^0.0.5",
     "connect-mongo": "^2.0.3",
     "connect-timeout": "^1.9.0",
     "cookie-parser": "^1",

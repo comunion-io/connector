@@ -44,8 +44,7 @@
 
   router.all('/r/*', actPre);
 
-  router.put('/r/*', cms.requiredUser);
-
+  // router.put '/r/*', cms.requiredUser
   router.post('/a/*', function(req, rsp, next) {
     var bo, rs;
     bo = req.body;
@@ -101,6 +100,8 @@
   // router.delete '/r/:entity/:id', data.del
   // router.delete '/r/:entity', data.del
   router.get('/r/org/info/members/:id', org.membersInfo);
+
+  router.post('/r/org/token/:id', org.tokenDeploy);
 
   router.get('/upload', function(req, rsp) {
     return rsp.render('upload.pug');

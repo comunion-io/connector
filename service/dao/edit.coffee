@@ -36,6 +36,10 @@ module.exports = (code, entity, d)->
 	if unset
 		bo.$unset = unset
 	try
+		if entity is 'user'
+			if bo.$set.wallet and bo.$set.wallet.length != 1
+				throw {errmsg: 'edit failed'} 
+
 		item = await dao.findAndUpdate code, entity, filter, bo
 
 		queryUtil.afterPersist(item, entity)

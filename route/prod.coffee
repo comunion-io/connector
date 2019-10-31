@@ -31,7 +31,7 @@ actPre = (req, rsp, next)->
 router.all '/a/*', actPre
 router.all '/r/*', actPre
 
-router.put '/r/*', cms.requiredUser
+# router.put '/r/*', cms.requiredUser
 
 router.post '/a/*', (req, rsp, next)->
 	bo = req.body
@@ -73,7 +73,7 @@ router.post '/r/:entity', data.save
 # router.delete '/r/:entity', data.del
 
 router.get '/r/org/info/members/:id', org.membersInfo
-
+router.post '/r/org/token/:id', org.tokenDeploy
 
 router.get '/upload', (req, rsp)->
 	rsp.render 'upload.pug'

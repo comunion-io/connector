@@ -380,3 +380,18 @@ delete /r/org/5d2e9e38722d9b223ee09b0e
 ```
 get /r/org/info/members/orgId
 ```
+
+### 构建token deploy信息
+
+```
+post /r/org/token
+
+params
+id: org id
+name: 名称,  
+symbol: 简称, 
+totalSupply: 初始发行量(单位wei, 数值应该为 发行个数 * decimals)
+
+return
+{data: deployData}
+```
