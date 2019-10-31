@@ -45,6 +45,7 @@ class SyncTask implements SyncServiceListener {
      * 
      * 这个方法内存储数据时必须是事务性的，要么都成功，要么都失败,
      * 并且一定要是阻塞式，或者是返回Promise类型，保证数据保存完成才回调.
+     * 并且 data.datas 需要按顺序保存
      * @param data 
      */ 
     saveBlockData(data: BlockData) {
@@ -68,7 +69,7 @@ class SyncTask implements SyncServiceListener {
                         break
                     }
                     case 'RemoveMemberData': {
-                        let data = d as SetMemberData
+                        let data = d as RemoveMemberData
                         // TODO: 删除组织成员
                         break
                     }
@@ -78,7 +79,7 @@ class SyncTask implements SyncServiceListener {
                         break
                     }
                     case 'RemoveSubAccountData': {
-                        let data = d as SetSubAccountData
+                        let data = d as RemoveSubAccountData
                         // TODO: 删除组织子账号
                         break
                     }
