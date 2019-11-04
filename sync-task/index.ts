@@ -100,6 +100,9 @@ class SyncTask implements SyncServiceListener {
             // TODO: 事务提交
         } catch (e) {
             // TODO: 事务回滚
+
+            // 需要抛出异常，让service知道失败了
+            throw e
         }
     }
 
