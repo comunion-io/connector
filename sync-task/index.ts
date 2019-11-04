@@ -96,8 +96,10 @@ class SyncTask implements SyncServiceListener {
                 }
             })
             // TODO: 保存最后同步完成的区块 data.blockHeight
-        } finally {
-            // TODO: 事务结束
+
+            // TODO: 事务提交
+        } catch (e) {
+            // TODO: 事务回滚
         }
     }
 
