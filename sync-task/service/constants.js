@@ -20,8 +20,6 @@ Constants.TOPICS = [
     web3.utils.sha3('SetToken(address)'),
     web3.utils.sha3('SetMemberRole(address,bytes32)'),
     web3.utils.sha3('RemoveMember(address)'),
-    web3.utils.sha3('SetSubAccount(address,bytes32)'),
-    web3.utils.sha3('RemoveSubAccount(address)'),
     web3.utils.sha3('Approval(address,address,uint256)'),
     web3.utils.sha3('Transfer(address,address,uint256)')
 ];

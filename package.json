@@ -21,7 +21,7 @@
     "cheerio": "^1.0.0-rc.2",
     "coffeescript": "^2.3.2",
     "compression": "^1.7.1",
-    "comunion-dao": "^0.0.5",
+    "comunion-dao": "^0.0.7",
     "connect-mongo": "^2.0.3",
     "connect-timeout": "^1.9.0",
     "cookie-parser": "^1",
@@ -77,8 +77,7 @@
     "vhost": "^3.0.2",
     "winston": "^2.4.1",
     "abi-decoder": "^2.2.2",
-    "async-lock": "^1.2.2",
-    "comunion-dao": "^0.0.6"
+    "async-lock": "^1.2.2"
   },
   "devDependencies": {
     "grunt": "^1.0.2",

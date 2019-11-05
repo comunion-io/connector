@@ -10,5 +10,6 @@ module.exports =
 			mailPsd: 'RjZoofwvjpamFk89'
 			name: 'Comunion Website'
 		web3Address: 'https://ropsten.infura.io/v3/11ae2b7ff4c04391b71dd5a196c21b0d'
+		infura_appid: '11ae2b7ff4c04391b71dd5a196c21b0d'
 #	production:
 #		db_port: 27017

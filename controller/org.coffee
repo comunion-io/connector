@@ -21,6 +21,7 @@ module.exports =
 			org = await dao.one code, 'org', _id: oid(req.params.id)
 			bo = req.body
 			deployData = OrgToken.genDeployData org.contract, bo.name, bo.symbol, bo.totalSupply
+			await dao.findAndUpdate code, 'org', _id: oid(req.params.id), {asset: bo}
 			rsp.send data: deployData
 		catch e
 			log e

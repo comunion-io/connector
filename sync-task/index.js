@@ -39,6 +39,7 @@ class SyncTask {
      *
      * 这个方法内存储数据时必须是事务性的，要么都成功，要么都失败,
      * 并且一定要是阻塞式，或者是返回Promise类型，保证数据保存完成才回调.
+     * 并且 data.datas 需要按顺序保存
      * @param data
      */
     saveBlockData(data) {
@@ -89,9 +90,12 @@ class SyncTask {
                 }
             });
             // TODO: 保存最后同步完成的区块 data.blockHeight
+            // TODO: 事务提交
         }
-        finally {
-            // TODO: 事务结束
+        catch (e) {
+            // TODO: 事务回滚
+            // 需要抛出异常，让service知道失败了
+            throw e;
         }
     }
 }
