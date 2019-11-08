@@ -11,7 +11,7 @@ async function updateOrgMember(isAdd, data) {
     let found = false;
     for (let key in members) {
         let member = members[key];
-        if (member.email === data.member) {
+        if (member.address === data.member) {
             if (!isAdd) {
                 members.splice(key, 1);
             } else {
@@ -24,7 +24,7 @@ async function updateOrgMember(isAdd, data) {
     }
     if (isAdd && !found) {
         let member = {
-            email: data.member,
+            address: data.member,
             role: data.role,
             txhash: data.txHash
         };
