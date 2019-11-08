@@ -24,6 +24,8 @@
 
   global.env = app.get('env');
 
+  global.syncTask = require('./sync-task/syncTask').service();
+
   ddao = require('./service/dao');
 
   moi = require('mongodb').ObjectID;
@@ -174,23 +176,17 @@
   log('init app');
 
   initDb = async function() {
-    var ido, it, k, results, v;
+    var i, ido, it, k, len, v;
     await dao.initDb(db, setting);
     ido = require('./idx');
-    results = [];
     for (k in ido) {
       v = ido[k];
-      results.push((function() {
-        var i, len, results1;
-        results1 = [];
-        for (i = 0, len = v.length; i < len; i++) {
-          it = v[i];
-          results1.push(dao.index(db, k, it.prop, it.opt));
-        }
-        return results1;
-      })());
+      for (i = 0, len = v.length; i < len; i++) {
+        it = v[i];
+        dao.index(db, k, it.prop, it.opt);
+      }
     }
-    return results;
+    return syncTask.start();
   };
 
   initDb();

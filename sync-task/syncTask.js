@@ -6,25 +6,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sync_service_1 = __importDefault(require("./service/sync-service"));
 
 class SyncTask {
-    getHttpsRpcUrl() {
+
+    async getHttpsRpcUrl() {
         // 返回 eth json rpc 地址, 如 infura 的 ropsten为: 'https://ropsten.infura.io/v3/<appid>'
         return setting.web3Address;
     }
-    getWSUrl() {
+    async getWSUrl() {
         // 返回 infura websocket 地址, 如 ropsten 为: 'wss://ropsten.infura.io/ws/v3/<appid>'
         return 'wss://ropsten.infura.io/ws/v3/' + setting.infura_appid;
     }
-    getDaosAddress() {
+    async getDaosAddress() {
         // 返回 Daos 合约地址, ropsten 测试地址为: '0x7284C823ea3AD29bEDfd09Ede1107981E9519896'
         return '0x7284C823ea3AD29bEDfd09Ede1107981E9519896'
     }
-    getComunionStartBlockHeight() {
+    async getComunionStartBlockHeight() {
         // 返回Daos发布时高度 或者 第一个组织发布时高度，将从这个高度开始同步
         return 8877398
     }
-    getLastBlockHeight() {
+    async getLastBlockHeight() {
         // 返回最新同步完成区块高度
-        let sync = await dao.get(db, "sync", {});
+        let sync = await dao.one(db, "sync", {});
         if (sync) {
             return sync.last;
         } else {
@@ -33,12 +34,12 @@ class SyncTask {
             return height;
         }
     }
-    isOrganization(contractAddress) {
+    async isOrganization(contractAddress) {
         // 返回 contractAddress 是否为 平台内组织的合约地址
         let org = await dao.get(db, "org", {contract: contractAddress});
         return org != null;
     }
-    isOrgTokenAndOwner(tokenContract, account) {
+    async isOrgTokenAndOwner(tokenContract, account) {
         // 返回 tokenContract 是否为 平台内组织Token的合约地址并且 account 为组织Token 的Owner (2.0版本 组织与组织Token的Owner为同一个地址)
         let org = await dao.get(db, "org", {"asset.contract": tokenContract});
         if (org != null) {
@@ -55,10 +56,11 @@ class SyncTask {
      * 并且 data.datas 需要按顺序保存
      * @param data
      */
-    saveBlockData(data) {
+    async saveBlockData(data) {
         // TODO: 事务开始
         try {
-            data.datas.forEach(d => {
+            for (let key in data.datas) {
+                let d = data.datas[key];
                 switch (d.type) {
                     case 'NewOrgData': {
                         let data = d;
@@ -140,7 +142,8 @@ class SyncTask {
                         break;
                     }
                 }
-            });
+            }
+
             // 保存最后同步完成的区块 data.blockHeight
             let height = data.blockHeight;
             await dao.findAndUpdate(db, "sync", {}, {last: height});
@@ -155,10 +158,9 @@ class SyncTask {
     }
 }
 
-module.exports = {
-    start: function() {
+module.exports = { 
+    service: function () {
         let service = new sync_service_1.default(new SyncTask());
-        service.start();
         return service;
     }
-}
+};

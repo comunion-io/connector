@@ -11,11 +11,11 @@ global.util = _.extend(require('./public/ext/common'), require('./public/ext/uti
 global.app = express()
 global.app.env = app.get('env') isnt 'production'
 global.env = app.get('env')
+global.syncTask = require('./sync-task/syncTask').service()
 
 ddao = require('./service/dao')
 moi = require('mongodb').ObjectID
 _gs = require('./setting')
-
 
 _.extend global,
 	db: 'comunion'
@@ -128,6 +128,8 @@ initDb = ->
 	for k, v of ido
 		for it in v
 			dao.index db, k, it.prop, it.opt
+
+	syncTask.start()
 
 initDb()
 app.use '/', require('./route/prod')
