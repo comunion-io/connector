@@ -75,7 +75,7 @@ module.exports =
 
 
 	logout: (req, rsp) ->
-		if req.cookies._ncs_
+		if req.cookies.token
 			cms.del req, rsp
 		rsp.send msg: 'm_logout_s'
 

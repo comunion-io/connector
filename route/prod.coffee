@@ -14,7 +14,7 @@ actPre = (req, rsp, next)->
 #		url: 'test'
 	# console.log("actPre:", req.cookies)
 	if true or app.env
-		req.cookies._ncs_ and await cms.get(req, rsp)
+		req.cookies.token and await cms.get(req, rsp)
 		# console.log("session:", req.session)
 		next()
 		return
@@ -25,13 +25,13 @@ actPre = (req, rsp, next)->
 			else
 				rsp.end '>_<'
 				return
-	req.cookies._ncs_ and await cms.get(req, rsp)
+	req.cookies.token and await cms.get(req, rsp)
 	next()
 
 router.all '/a/*', actPre
 router.all '/r/*', actPre
 
-# router.put '/r/*', cms.requiredUser
+router.put '/r/*', cms.requiredUser
 
 router.post '/a/*', (req, rsp, next)->
 	bo = req.body

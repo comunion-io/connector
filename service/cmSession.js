@@ -5,7 +5,7 @@
       var token;
       token = util.randomChar(32);
       user.token = token;
-      rsp.cookie("_ncs_", user._id, {
+      rsp.cookie("token", user._id, {
         maxAge: maxAge
       });
       return dao.save(req.c.code, 'session:_id', user);
@@ -17,22 +17,22 @@
     },
     get: async function(req, rsp) {
       var ncs, ret;
-      if (ncs = req.cookies._ncs_) {
+      if (ncs = req.cookies.token) {
         ret = (await gEnt(req.c.code, 'session').findOne({
           token: ncs
         }));
         if (ret) {
           return req.session = ret;
         } else {
-          return rsp.clearCookie('_ncs_');
+          return rsp.clearCookie('token');
         }
       }
     },
     del: function(req, rsp) {
       dao.delItem(req.c.code, 'session', {
-        _id: req.cookies._ncs_
+        _id: req.cookies.token
       });
-      return rsp.clearCookie('_ncs_');
+      return rsp.clearCookie('token');
     },
     required: function(req, rsp, next) {
       var s;

@@ -88,7 +88,7 @@
       }
     },
     logout: function(req, rsp) {
-      if (req.cookies._ncs_) {
+      if (req.cookies.token) {
         cms.del(req, rsp);
       }
       return rsp.send({

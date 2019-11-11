@@ -2,23 +2,23 @@ module.exports =
 	set: (req, rsp, user, maxAge = Date.day)->
 		token = util.randomChar(32)
 		user.token = token
-		rsp.cookie "_ncs_", user._id, maxAge: maxAge
+		rsp.cookie "token", user._id, maxAge: maxAge
 		dao.save req.c.code, 'session:_id', user
 
 	update: (code, id, opt)->
 		dao.update code, 'session', {_id: id}, opt
 
 	get: (req, rsp)->
-		if ncs = req.cookies._ncs_
+		if ncs = req.cookies.token
 			ret = await gEnt(req.c.code, 'session').findOne token: ncs
 			if ret
 				req.session = ret
 			else
-				rsp.clearCookie '_ncs_'
+				rsp.clearCookie 'token'
 
 	del: (req, rsp)->
-		dao.delItem req.c.code, 'session', _id: req.cookies._ncs_
-		rsp.clearCookie '_ncs_'
+		dao.delItem req.c.code, 'session', _id: req.cookies.token
+		rsp.clearCookie 'token'
 
 	required: (req, rsp, next)->
 		if (s = req.session) and !s.can_verify and !s.need_verify
