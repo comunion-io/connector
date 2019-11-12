@@ -5,7 +5,7 @@
       var token;
       token = util.randomChar(32);
       user.token = token;
-      rsp.cookie("token", user._id, {
+      rsp.cookie("token", user.token, {
         maxAge: maxAge
       });
       return dao.save(req.c.code, 'session:_id', user);

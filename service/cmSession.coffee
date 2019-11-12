@@ -2,7 +2,7 @@ module.exports =
 	set: (req, rsp, user, maxAge = Date.day)->
 		token = util.randomChar(32)
 		user.token = token
-		rsp.cookie "token", user._id, maxAge: maxAge
+		rsp.cookie "token", user.token, maxAge: maxAge
 		dao.save req.c.code, 'session:_id', user
 
 	update: (code, id, opt)->
