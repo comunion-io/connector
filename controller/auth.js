@@ -156,7 +156,8 @@
         rw = (await web3.checkTran(org.hash));
         if (rw && rw.blockNumber) {
           $set = {
-            status: 2
+            status: 2,
+            contract: rw.contractAddress
           };
           dao.findAndUpdate(code, 'org', {
             _id: org._id
