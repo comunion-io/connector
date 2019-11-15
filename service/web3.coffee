@@ -3,10 +3,7 @@ Web3 = require('web3')
 module.exports =
 
 	web3: ->
-		if web3?
-			web3 = new Web3(web3.currentProvider)
-		else
-			web3 = new Web3(new Web3.providers.HttpProvider(setting.web3Address))
+		web3 = new Web3(new Web3.providers.HttpProvider(setting.web3Address))
 
 	getContract: (abiFile, addr)->
 		abi = JSON.parse(fs.readFileSync(abiFile))
@@ -16,7 +13,7 @@ module.exports =
 		@getContract(abiFile, addr).sendCoin.sendTransaction(acct, 1, data)
 
 	trans: (from, data)->
-		rec = await web3.eth.sendTransaction({from, data})
+		rec = await @web3().eth.sendTransaction({from, data})
 			.once 'receipt', (rec)->
 			.once 'confirmation', (cfn, rec)->
 			.on 'err', (err)-> log err
@@ -24,6 +21,6 @@ module.exports =
 
 	checkTran: (hash) ->
 		try
-			await web3.eth.getTransactionReceipt(hash)
+			await @web3().eth.getTransactionReceipt(hash)
 		catch e
 			log e

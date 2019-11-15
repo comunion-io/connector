@@ -7,7 +7,7 @@ const sync_service_1 = __importDefault(require("./service/sync-service"));
 
 async function updateOrgMember(isAdd, data) {
     let org = await dao.get(db, "org", {contract: data.orgAddress.toLocaleLowerCase()});
-    let members = org.members;
+    let members = org.members || [];
     let found = false;
     for (let key in members) {
         let member = members[key];
@@ -50,7 +50,7 @@ class SyncTask {
     }
     async getComunionStartBlockHeight() {
         // 返回Daos发布时高度 或者 第一个组织发布时高度，将从这个高度开始同步
-        return 8877398
+        return 6769890
     }
     async getLastBlockHeight() {
         // 返回最新同步完成区块高度
@@ -89,8 +89,9 @@ class SyncTask {
     async saveBlockData(data) {
         // TODO: 事务开始
         try {
-            for (let key in data.datas) {
-                let d = data.datas[key];
+            for (let idx = 0; idx < data.datas.length; idx++) {
+                let d = data.datas[idx];
+                // console.log("sync data:", idx, d, data.datas);
                 switch (d.type) {
                     case 'NewOrgData': {
                         let data = d;
@@ -173,6 +174,7 @@ class SyncTask {
             // 保存最后同步完成的区块 data.blockHeight
             let height = data.blockHeight;
             await dao.findAndUpdate(db, "sync", {}, {$set: {last: height}});
+            console.log("sync height:", height);
 
             // TODO: 事务提交
         }

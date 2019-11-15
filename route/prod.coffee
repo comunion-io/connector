@@ -31,7 +31,7 @@ actPre = (req, rsp, next)->
 router.all '/a/*', actPre
 router.all '/r/*', actPre
 
-router.put '/r/*', cms.requiredUser
+# router.put '/r/*', cms.requiredUser
 
 router.post '/a/*', (req, rsp, next)->
 	bo = req.body

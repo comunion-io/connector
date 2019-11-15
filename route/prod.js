@@ -44,8 +44,7 @@
 
   router.all('/r/*', actPre);
 
-  router.put('/r/*', cms.requiredUser);
-
+  // router.put '/r/*', cms.requiredUser
   router.post('/a/*', function(req, rsp, next) {
     var bo, rs;
     bo = req.body;
