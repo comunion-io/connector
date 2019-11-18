@@ -101,7 +101,7 @@
   // router.delete '/r/:entity', data.del
   router.get('/r/org/info/members/:id', org.membersInfo);
 
-  router.post('/r/org/token/:id', org.tokenDeploy);
+  router.put('/r/org/finance/:id', org.financeUpdate);
 
   router.get('/upload', function(req, rsp) {
     return rsp.render('upload.pug');

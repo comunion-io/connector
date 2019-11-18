@@ -9,15 +9,15 @@ module.exports =
 		dao.update code, 'session', {_id: id}, opt
 
 	get: (req, rsp)->
-		if ncs = req.cookies.token
-			ret = await gEnt(req.c.code, 'session').findOne token: ncs
+		if token = req.cookies.token
+			ret = await gEnt(req.c.code, 'session').findOne token: token
 			if ret
 				req.session = ret
 			else
 				rsp.clearCookie 'token'
 
 	del: (req, rsp)->
-		dao.delItem req.c.code, 'session', _id: req.cookies.token
+		dao.delItem req.c.code, 'session', token: req.cookies.token
 		rsp.clearCookie 'token'
 
 	required: (req, rsp, next)->

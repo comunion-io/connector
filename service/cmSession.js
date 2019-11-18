@@ -16,10 +16,10 @@
       }, opt);
     },
     get: async function(req, rsp) {
-      var ncs, ret;
-      if (ncs = req.cookies.token) {
+      var ret, token;
+      if (token = req.cookies.token) {
         ret = (await gEnt(req.c.code, 'session').findOne({
-          token: ncs
+          token: token
         }));
         if (ret) {
           return req.session = ret;
@@ -30,7 +30,7 @@
     },
     del: function(req, rsp) {
       dao.delItem(req.c.code, 'session', {
-        _id: req.cookies.token
+        token: req.cookies.token
       });
       return rsp.clearCookie('token');
     },

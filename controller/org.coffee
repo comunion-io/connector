@@ -15,14 +15,15 @@ module.exports =
 		catch e
 			log e
 	
-	tokenDeploy: (req, rsp) ->
+	financeUpdate: (req, rsp) ->
 		code = req.c.code
 		try
 			org = await dao.one code, 'org', _id: oid(req.params.id)
+			finance = org.finance || []
 			bo = req.body
-			deployData = OrgToken.genDeployData org.contract, bo.name, bo.symbol, bo.totalSupply
-			await dao.findAndUpdate code, 'org', _id: oid(req.params.id), {asset: bo}
-			rsp.send data: deployData
+			finance.push bo
+			await dao.findAndUpdate code, 'org', _id: oid(req.params.id), {$set: {finance: finance}}
+			rsp.send msg: 'm_ok'
 		catch e
 			log e
 			rsp.send

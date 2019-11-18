@@ -135,8 +135,13 @@ class SyncTask {
                         let update = false;
                         for (let key in finance) {
                             let item = finance[key]
-                            if (item.value === data.spender.toLocaleLowerCase()) {
-                                item.budget = data.value;
+                            if (item.txhash === data.txHash) {
+                                if (item.value === "0") {
+                                    finance.splice(key, 1);
+                                } else {
+                                    item.budget = data.value;
+                                    item.value = data.spender.toLocaleLowerCase();
+                                }
                                 update = true;
                                 break;
                             }

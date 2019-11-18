@@ -33,22 +33,25 @@
         return log(e);
       }
     },
-    tokenDeploy: async function(req, rsp) {
-      var bo, code, deployData, e, org;
+    financeUpdate: async function(req, rsp) {
+      var bo, code, e, finance, org;
       code = req.c.code;
       try {
         org = (await dao.one(code, 'org', {
           _id: oid(req.params.id)
         }));
+        finance = org.finance || [];
         bo = req.body;
-        deployData = OrgToken.genDeployData(org.contract, bo.name, bo.symbol, bo.totalSupply);
+        finance.push(bo);
         await dao.findAndUpdate(code, 'org', {
           _id: oid(req.params.id)
         }, {
-          asset: bo
+          $set: {
+            finance: finance
+          }
         });
         return rsp.send({
-          data: deployData
+          msg: 'm_ok'
         });
       } catch (error) {
         e = error;
