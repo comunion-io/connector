@@ -181,7 +181,7 @@ class SyncTask {
             // 保存最后同步完成的区块 data.blockHeight
             let height = data.blockHeight;
             await dao.findAndUpdate(db, "sync", {}, {$set: {last: height}});
-            console.log("sync height:", height);
+            // console.log("sync height:", height);
 
             // TODO: 事务提交
         }
