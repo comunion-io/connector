@@ -23,7 +23,7 @@ async function updateOrgMember(isAdd, data) {
         }
     }
     if (isAdd && !found) {
-        let user = await dao.get(db, "user", {"wallet.value": data.member.toLocaleLowerCase()});
+        let user = await dao.get(db, "user", {"wallet.address": data.member.toLocaleLowerCase()});
         let member = {
             user_id: user._id,
             address: data.member.toLocaleLowerCase(),
@@ -93,7 +93,7 @@ class SyncTask {
         try {
             for (let idx = 0; idx < data.datas.length; idx++) {
                 let d = data.datas[idx];
-                console.log("sync data:", idx, d);
+                console.log("sync data:", data.blockHeight, d);
                 switch (d.type) {
                     case 'NewOrgData': {
                         let data = d;

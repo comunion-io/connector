@@ -35,7 +35,7 @@ user: 成员对象
 |logo|用户头像|"http://comunion-avatar.sgp1.digitaloceanspaces.com/xxx"|
 |social|用户社交账号|[{"name": "facebook", "value": "facebook.com/xxx"}, ...]|
 |skills|用户技能|["ui", "dev", ...]|
-|wallet|用户钱包 **在v2.0仅支持账户钱包一一绑定**|[{"name":"eth","value":"0xd7f22d785913db334f9adad38cf0a5538ad423e9", "usage": "default"}]|
+|wallet|用户钱包 **在v2.0仅支持账户钱包一一绑定**|[{"name":"eth","address":"0xd7f22d785913db334f9adad38cf0a5538ad423e9", "usage": "default"}]|
 |orgs|用户所在组织 DBRef|[org_id, org_id, ...]|
 
 ---
