@@ -24,13 +24,15 @@ async function updateOrgMember(isAdd, data) {
     }
     if (isAdd && !found) {
         let user = await dao.get(db, "user", {"wallet.address": data.member.toLocaleLowerCase()});
-        let member = {
-            user_id: user._id,
-            address: data.member.toLocaleLowerCase(),
-            role: data.role,
-            txhash: data.txHash
-        };
-        members.push(member);
+        if (user != null) {
+            let member = {
+                user_id: user._id,
+                address: data.member.toLocaleLowerCase(),
+                role: data.role,
+                txhash: data.txHash
+            };
+            members.push(member);
+        }
     }
 
     await dao.findAndUpdate(db, "org", {contract: data.orgAddress.toLocaleLowerCase()}, {$set: {members: members}});
