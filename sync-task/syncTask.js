@@ -93,7 +93,7 @@ class SyncTask {
         try {
             for (let idx = 0; idx < data.datas.length; idx++) {
                 let d = data.datas[idx];
-                // console.log("sync data:", idx, d, data.datas);
+                console.log("sync data:", idx, d);
                 switch (d.type) {
                     case 'NewOrgData': {
                         let data = d;
@@ -132,7 +132,7 @@ class SyncTask {
                     case 'ApprovalData': {
                         let data = d;
                         // Owner更新某账号授权额度
-                        let org = await dao.get(db, "org", {contract: data.orgAddress.toLocaleLowerCase()});
+                        let org = await dao.get(db, "org", {"asset.contract": data.tokenAddress.toLocaleLowerCase()});
                         let finance = org.finance || [];
                         let update = false;
                         for (let key in finance) {
@@ -157,7 +157,7 @@ class SyncTask {
                             }
                             finance.push(item);
                         }
-                        await dao.findAndUpdate(db, "org", {contract: data.orgAddress.toLocaleLowerCase()}, {$set:{finance: finance}});
+                        await dao.findAndUpdate(db, "org", {_id: org._id}, {$set:{finance: finance}});
                         break;
                     }
                     case 'TransferData': {
