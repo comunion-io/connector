@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sync_service_1 = __importDefault(require("./service/sync-service"));
 
 async function updateOrgMember(isAdd, data) {
-    let tx = await dao.get(db, "tx", {txhash: data.txHash});
+    let tx = await dao.get(db, "tx", {txHash: data.txHash});
     let org = await dao.get(db, "org", {contract: data.orgAddress.toLocaleLowerCase()});
     let members = org.members || [];
     let found = false;
@@ -17,7 +17,7 @@ async function updateOrgMember(isAdd, data) {
                 members.splice(key, 1);
             } else {
                 member.role = data.role;
-                member.txhash = data.txHash;
+                member.txHash = data.txHash;
                 found = true;
             }
             if (tx != null) {
@@ -33,7 +33,7 @@ async function updateOrgMember(isAdd, data) {
                 user_id: user._id,
                 address: data.member.toLocaleLowerCase(),
                 role: data.role,
-                txhash: data.txHash
+                txHash: data.txHash
             };
             if (tx != null) {
                 _.extend(member, tx.data);
@@ -107,11 +107,11 @@ class SyncTask {
                     case 'NewOrgData': {
                         let data = d;
                         // 新组织注册
-                        let tx = await data.get(db, "tx", {txhash: data.txHash});
+                        let tx = await data.get(db, "tx", {txHash: data.txHash});
                         let raw = {
                             owner: data.owner.toLocaleLowerCase(), 
                             contract: data.address.toLocaleLowerCase(), 
-                            txhash: data.txHash
+                            txHash: data.txHash
                         };
                         if (tx != null) {
                             _.extend(raw, tx.data);
@@ -122,11 +122,11 @@ class SyncTask {
                     case 'SetTokenData': {
                         let data = d;
                         // 给组织设置Token
-                        let tx = await data.get(db, "tx", {txhash: data.txHash});
+                        let tx = await data.get(db, "tx", {txHash: data.txHash});
                         let raw = {
                             asset: {
                                 contract: data.tokenAddress.toLocaleLowerCase(),
-                                txhash: data.txHash
+                                txHash: data.txHash
                             }
                         };
                         if (tx != null) {
@@ -160,13 +160,13 @@ class SyncTask {
                     case 'ApprovalData': {
                         let data = d;
                         // Owner更新某账号授权额度
-                        let tx = await data.get(db, "tx", {txhash: data.txHash});
+                        let tx = await data.get(db, "tx", {txHash: data.txHash});
                         let org = await dao.get(db, "org", {"asset.contract": data.tokenAddress.toLocaleLowerCase()});
                         let finance = org.finance || [];
                         let update = false;
                         for (let key in finance) {
                             let item = finance[key]
-                            if (item.txhash === data.txHash) {
+                            if (item.txHash === data.txHash) {
                                 if (item.value === "0") {
                                     finance.splice(key, 1);
                                 } else {
@@ -185,7 +185,7 @@ class SyncTask {
                                 tokenAddress: data.tokenAddress.toLocaleLowerCase(),
                                 value: data.spender,
                                 budget: data.value,
-                                txhash: data.txHash
+                                txHash: data.txHash
                             }
                             if (tx != null) {
                                 _.extend(item, tx.data);
@@ -198,13 +198,13 @@ class SyncTask {
                     case 'TransferData': {
                         let data = d;
                         // Owner账号转出记录
-                        let tx = await data.get(db, "tx", {txhash: data.txHash});
+                        let tx = await data.get(db, "tx", {txHash: data.txHash});
                         let org = await dao.get(db, "org", {"asset.contract": data.tokenAddress.toLocaleLowerCase()});
                         let record = {
                             org_id: org._id,
                             sender: data.from.toLocaleLowerCase(),
                             receiver: data.to.toLocaleLowerCase(),
-                            txhash: data.txHash,
+                            txHash: data.txHash,
                             token: org.asset.symbol,
                             amount: data.value
                         }
@@ -215,7 +215,7 @@ class SyncTask {
                         break;
                     }
                 }
-                await dao.findAndUpdate(db, "tx", {txhash: d.txHash}, {$set: {status: 1}});
+                await dao.findAndUpdate(db, "tx", {txHash: d.txHash}, {$set: {status: 1}});
             }
 
             // 保存最后同步完成的区块 data.blockHeight

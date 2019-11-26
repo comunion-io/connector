@@ -10,18 +10,18 @@
       code = req.c.code;
       try {
         tx = (await dao.one(code, 'tx', {
-          _id: oid(req.params.id)
+          txHash: req.params.hash
         }));
-        if (tx.status != null) {
-          receipt = (await web3.checkTran(tx.txhash));
-          if (receipt && receipt.status) {
+        if (tx.status === 2) {
+          receipt = (await web3.checkTran(tx.txHash));
+          if (receipt && (receipt.status != null)) {
             if (receipt.status === '0x1') {
               tx.status = 1;
             } else {
               tx.status = 0;
             }
             await dao.findAndUpdatedb("tx", {
-              txhash: tx.txhash
+              txHash: tx.txHash
             }, {
               $set: {
                 status: tx.status
@@ -29,9 +29,7 @@
             });
           }
         }
-        return rsp.send({
-          tx: tx
-        });
+        return rsp.send(tx);
       } catch (error) {
         e = error;
         log(e);

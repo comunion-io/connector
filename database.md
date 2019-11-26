@@ -47,7 +47,7 @@ record: 转账记录对象
 |org_id|所属组织|"5da322b0b9f968051ee3578b"|
 |sender|发送者|"0xd7f22d785913db334f9adad38cf0a5538ad423e9"|
 |receiver|接收者|"0xd7f22d785913db334f9adad38cf0a5538ad423e9"|
-|txhash|交易哈希|"0xfe686161e8aa95f6a4c42dec49dd2581cfc4984f3803a336ebada604c46415fd"|
+|txHash|交易哈希|"0xfe686161e8aa95f6a4c42dec49dd2581cfc4984f3803a336ebada604c46415fd"|
 |token|代币类型|"ETH"|
 |amount|数量|1000000000000000000|
 |remark|备注|"完成v1.0原型设计稿"|
@@ -67,8 +67,8 @@ tx: 链上交易记录
 
 |key|desc|value|
 |-|-|-|
-|txhash|交易哈希|"0xfe686161e8aa95f6a4c42dec49dd2581cfc4984f3803a336ebada604c46415fd"|
-|user_id|交易发起人ID|"5db13593b9f968051ee3578d"|
+|txHash|交易哈希|"0xfe686161e8aa95f6a4c42dec49dd2581cfc4984f3803a336ebada604c46415fd"|
+|userId|交易发起人ID|"5db13593b9f968051ee3578d"|
 |type|操作类型|NewOrgData,SetTokenData,SetMemberData,RemoveMemberData,ApprovalData,TransferData|
 |data|非上链更新数据|数据类型参见user,org,record结构。|
 |status|交易状态|0失败，1成功(前端不需要提交该字段)|
