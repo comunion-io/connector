@@ -3,6 +3,7 @@ router = require('express').Router()
 auth = require '../controller/auth'
 data = require '../controller/data'
 org = require '../controller/org'
+tx = require '../controller/tx'
 
 log authStr = db + ':test'
 
@@ -74,6 +75,8 @@ router.post '/r/:entity', data.save
 
 router.get '/r/org/info/members/:id', org.membersInfo
 router.put '/r/org/finance/:id', org.financeUpdate
+
+router.get '/r/tx/receipt/:id', tx.receipt
 
 router.get '/upload', (req, rsp)->
 	rsp.render 'upload.pug'
