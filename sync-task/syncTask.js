@@ -30,7 +30,7 @@ async function updateOrgMember(isAdd, data) {
         let user = await dao.get(db, "user", {"wallet.address": data.member.toLocaleLowerCase()});
         if (user != null) {
             let member = {
-                user_id: user._id,
+                userId: user._id,
                 address: data.member.toLocaleLowerCase(),
                 role: data.role,
                 txHash: data.txHash
@@ -172,7 +172,7 @@ class SyncTask {
                                     finance.splice(key, 1);
                                 } else {
                                     item.budget = data.value;
-                                    item.value = data.spender.toLocaleLowerCase();
+                                    item.address = data.spender.toLocaleLowerCase();
                                 }
                                 if (tx != null) {
                                     _.extend(item, tx.data);
@@ -184,7 +184,7 @@ class SyncTask {
                         if (!update) {
                             let item = {
                                 tokenAddress: data.tokenAddress.toLocaleLowerCase(),
-                                value: data.spender,
+                                address: data.spender,
                                 budget: data.value,
                                 txHash: data.txHash
                             }
