@@ -116,7 +116,8 @@ class SyncTask {
                         if (tx != null) {
                             _.extend(raw, tx.data);
                         }
-                        await dao.findAndUpdate(db, "org", {name: data.name}, {$set: raw});
+                        // await dao.findAndUpdate(db, "org", {name: data.name}, {$set: raw});
+                        await dao.save(db, "org", raw)
                         break;
                     }
                     case 'SetTokenData': {
