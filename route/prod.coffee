@@ -56,6 +56,8 @@ router.post '/a/verifyCode', auth.verifyCode
 
 router.get '/a/org/orgStatus/:id', auth.orgStatus
 
+router.get '/r/tx/receipt/:hash', tx.receipt
+
 # router.get '/r/comp', data.comp
 router.get '/r/agg/:entity', data.agg
 # router.get '/r/userRank/:entity/:key/:val/:prop', data.userRank
@@ -75,8 +77,6 @@ router.post '/r/:entity', data.save
 
 router.get '/r/org/info/members/:id', org.membersInfo
 router.put '/r/org/finance/:id', org.financeUpdate
-
-router.get '/r/tx/receipt/:hash', tx.receipt
 
 router.get '/upload', (req, rsp)->
 	rsp.render 'upload.pug'

@@ -12,7 +12,7 @@
         tx = (await dao.one(code, 'tx', {
           txHash: req.params.hash
         }));
-        if (tx.status === 2) {
+        if ((tx != null) && tx.status === 2) {
           receipt = (await web3.checkTran(tx.txHash));
           if (receipt && (receipt.status != null)) {
             if (receipt.status === '0x1') {
@@ -29,7 +29,16 @@
             });
           }
         }
-        return rsp.send(tx);
+        if (tx != null) {
+          return rsp.send({
+            tx: tx
+          });
+        } else {
+          return rsp.send({
+            err: 1,
+            msg: '数据错误'
+          });
+        }
       } catch (error) {
         e = error;
         log(e);
