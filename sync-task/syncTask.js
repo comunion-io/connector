@@ -107,7 +107,7 @@ class SyncTask {
                     case 'NewOrgData': {
                         let data = d;
                         // 新组织注册
-                        let tx = await data.get(db, "tx", {txHash: data.txHash});
+                        let tx = await dao.get(db, "tx", {txHash: data.txHash});
                         let raw = {
                             owner: data.owner.toLocaleLowerCase(), 
                             contract: data.address.toLocaleLowerCase(), 
@@ -123,7 +123,7 @@ class SyncTask {
                     case 'SetTokenData': {
                         let data = d;
                         // 给组织设置Token
-                        let tx = await data.get(db, "tx", {txHash: data.txHash});
+                        let tx = await dao.get(db, "tx", {txHash: data.txHash});
                         let raw = {
                             asset: {
                                 contract: data.tokenAddress.toLocaleLowerCase(),
@@ -161,7 +161,7 @@ class SyncTask {
                     case 'ApprovalData': {
                         let data = d;
                         // Owner更新某账号授权额度
-                        let tx = await data.get(db, "tx", {txHash: data.txHash});
+                        let tx = await dao.get(db, "tx", {txHash: data.txHash});
                         let org = await dao.get(db, "org", {"asset.contract": data.tokenAddress.toLocaleLowerCase()});
                         let finance = org.finance || [];
                         let update = false;
@@ -199,7 +199,7 @@ class SyncTask {
                     case 'TransferData': {
                         let data = d;
                         // Owner账号转出记录
-                        let tx = await data.get(db, "tx", {txHash: data.txHash});
+                        let tx = await dao.get(db, "tx", {txHash: data.txHash});
                         let org = await dao.get(db, "org", {"asset.contract": data.tokenAddress.toLocaleLowerCase()});
                         let record = {
                             org_id: org._id,
