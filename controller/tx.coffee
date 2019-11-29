@@ -12,7 +12,7 @@ module.exports =
 						tx.status = 1
 					else
 						tx.status = 0
-					await dao.findAndUpdate("tx", {txHash: tx.txHash}, {$set: {status: tx.status}})
+					await dao.findAndUpdate(code, "tx", {txHash: tx.txHash}, {$set: {status: tx.status}})
 
 			if tx?
 				rsp.send tx

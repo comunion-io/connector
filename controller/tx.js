@@ -20,7 +20,7 @@
             } else {
               tx.status = 0;
             }
-            await dao.findAndUpdate("tx", {
+            await dao.findAndUpdate(code, "tx", {
               txHash: tx.txHash
             }, {
               $set: {
