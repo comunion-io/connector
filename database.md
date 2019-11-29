@@ -71,7 +71,7 @@ tx: 链上交易记录
 |userId|交易发起人ID|"5db13593b9f968051ee3578d"|
 |type|操作类型|NewOrgData,SetTokenData,SetMemberData,RemoveMemberData,ApprovalData,TransferData|
 |data|非上链更新数据|数据类型参见user,org,record结构。|
-|status|交易状态|0失败，1成功(前端不需要提交该字段)|
+|status|交易状态|0失败，1成功,2pending(前端初始化状态为2)|
 
 **不同type的data数据说明：**
 
