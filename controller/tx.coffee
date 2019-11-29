@@ -15,14 +15,13 @@ module.exports =
 					await dao.findAndUpdatedb("tx", {txHash: tx.txHash}, {$set: {status: tx.status}})
 
 			if tx?
-				rsp.send
-					tx: tx
+				rsp.send tx
 			else
 				rsp.send
-					err: 1
+					err: -1
 					msg: '数据错误'
 		catch e
 			log e
 			rsp.send
-				err: 1
+				err: -1
 				msg: '数据错误'

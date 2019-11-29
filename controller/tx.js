@@ -30,12 +30,10 @@
           }
         }
         if (tx != null) {
-          return rsp.send({
-            tx: tx
-          });
+          return rsp.send(tx);
         } else {
           return rsp.send({
-            err: 1,
+            err: -1,
             msg: '数据错误'
           });
         }
@@ -43,7 +41,7 @@
         e = error;
         log(e);
         return rsp.send({
-          err: 1,
+          err: -1,
           msg: '数据错误'
         });
       }
