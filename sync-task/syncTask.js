@@ -31,6 +31,7 @@ async function updateOrgMember(isAdd, data) {
         if (user != null) {
             let member = {
                 userId: user._id,
+                userName: user.username,
                 address: data.member.toLocaleLowerCase(),
                 role: data.role,
                 txHash: data.txHash
