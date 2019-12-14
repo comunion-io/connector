@@ -169,12 +169,13 @@ class SyncTask {
                         let update = false;
                         for (let key in finance) {
                             let item = finance[key]
-                            if (item.txHash === data.txHash) {
+                            if (item.address === data.spender.toLocaleLowerCase()) {
                                 if (item.value === "0") {
                                     finance.splice(key, 1);
                                 } else {
+                                    item.tokenAddress = data.tokenAddress.toLocaleLowerCase();
                                     item.budget = data.value;
-                                    item.address = data.spender.toLocaleLowerCase();
+                                    item.txHash = data.txHash;
                                 }
                                 if (tx != null) {
                                     _.extend(item, tx.data);
