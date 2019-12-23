@@ -8,7 +8,7 @@ module.exports =
 			if tx? and tx.status == 2
 				receipt = await web3.checkTran tx.txHash
 				if receipt && receipt.status?
-					if receipt.status == '0x1'
+					if receipt.status
 						tx.status = 1
 					else
 						tx.status = 0

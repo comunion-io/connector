@@ -15,7 +15,7 @@
         if ((tx != null) && tx.status === 2) {
           receipt = (await web3.checkTran(tx.txHash));
           if (receipt && (receipt.status != null)) {
-            if (receipt.status === '0x1') {
+            if (receipt.status) {
               tx.status = 1;
             } else {
               tx.status = 0;
