@@ -184,15 +184,19 @@ class SyncTask {
                                 break;
                             }
                         }
+                        let user = await dao.get(db, "user", {"wallet.address":data.spender.toLocaleLowerCase()});
                         if (!update) {
                             let item = {
                                 tokenAddress: data.tokenAddress.toLocaleLowerCase(),
-                                address: data.spender,
+                                address: data.spender.toLocaleLowerCase(),
                                 budget: data.value,
                                 txHash: data.txHash
                             }
                             if (tx != null) {
                                 _.extend(item, tx.data);
+                            }
+                            if (user != nil) {
+                                item.userId = user._id;
                             }
                             finance.push(item);
                         }
@@ -204,6 +208,7 @@ class SyncTask {
                         // Owner账号转出记录
                         let tx = await dao.get(db, "tx", {txHash: data.txHash});
                         let org = await dao.get(db, "org", {"asset.contract": data.tokenAddress.toLocaleLowerCase()});
+                        let user = await dao.get(db, "user", {"wallet.address":data.to.toLocaleLowerCase()});
                         let record = {
                             org_id: org._id,
                             sender: data.from.toLocaleLowerCase(),
@@ -214,6 +219,9 @@ class SyncTask {
                         }
                         if (tx != null) {
                             _.extend(record, tx.data);
+                        }
+                        if (user != nil) {
+                            record.receiverId = user._id;
                         }
                         await dao.save(db, "record", record);
                         break;
