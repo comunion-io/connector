@@ -21,6 +21,7 @@
             "wallet.address": v.receiver
           }));
           v.receiveUser = user;
+          res.entity[k] = v;
         }
       } else {
         user = (await dao.get(db, "user", {
