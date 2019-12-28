@@ -58,6 +58,7 @@ router.post '/a/verifyCode', auth.verifyCode
 router.get '/a/org/orgStatus/:id', auth.orgStatus
 
 router.get '/r/record/:id', record.get
+router.get '/r/record', record.list
 router.get '/r/tx/receipt/:hash', tx.receipt
 
 # router.get '/r/comp', data.comp

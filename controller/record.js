@@ -6,28 +6,30 @@
 
   module.exports = {
     get: async function(req, rsp) {
-      var k, ref, res, user, v;
+      var res, user;
       req.id = req.params.id;
       req.params.entity = 'record';
       res = (await find(req.c.code, req.params.entity, req));
       if (!res.entity) {
         rsp.status(350);
       }
-      if (res.count != null) {
-        ref = res.entities;
-        for (k in ref) {
-          v = ref[k];
-          user = (await dao.get(db, "user", {
-            "wallet.address": v.receiver
-          }));
-          v.receiveUser = user;
-          res.entities[k] = v;
-        }
-      } else {
+      user = (await dao.get(db, "user", {
+        "wallet.address": res.entity.receiver
+      }));
+      res.entity.receiveUser = user;
+      return rsp.send(res);
+    },
+    list: async function(req, rsp) {
+      var k, ref, res, user, v;
+      req.params.entity = 'record';
+      res = (await find(req.c.code, req.params.entity, req));
+      ref = res.entities;
+      for (k in ref) {
+        v = ref[k];
         user = (await dao.get(db, "user", {
-          "wallet.address": res.entity.receiver
+          "wallet.address": v.receiver
         }));
-        res.entity.receiveUser = user;
+        v.receiveUser = user;
       }
       return rsp.send(res);
     }
