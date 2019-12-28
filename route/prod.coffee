@@ -4,6 +4,7 @@ auth = require '../controller/auth'
 data = require '../controller/data'
 org = require '../controller/org'
 tx = require '../controller/tx'
+record = require '../controller/record'
 
 log authStr = db + ':test'
 
@@ -56,6 +57,7 @@ router.post '/a/verifyCode', auth.verifyCode
 
 router.get '/a/org/orgStatus/:id', auth.orgStatus
 
+router.get '/r/record/:id', record.get
 router.get '/r/tx/receipt/:hash', tx.receipt
 
 # router.get '/r/comp', data.comp
