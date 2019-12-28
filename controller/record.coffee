@@ -8,10 +8,10 @@ module.exports =
 		unless res.entity
 			rsp.status 350
 		if res.count?
-			for k, v of res.entity
+			for k, v of res.entities
 				user = await dao.get(db, "user", {"wallet.address":v.receiver})
 				v.receiveUser = user
-				res.entity[k] = v
+				res.entities[k] = v
 		else
 			user = await dao.get(db, "user", {"wallet.address":res.entity.receiver})
 			res.entity.receiveUser = user

@@ -14,14 +14,14 @@
         rsp.status(350);
       }
       if (res.count != null) {
-        ref = res.entity;
+        ref = res.entities;
         for (k in ref) {
           v = ref[k];
           user = (await dao.get(db, "user", {
             "wallet.address": v.receiver
           }));
           v.receiveUser = user;
-          res.entity[k] = v;
+          res.entities[k] = v;
         }
       } else {
         user = (await dao.get(db, "user", {
