@@ -117,6 +117,7 @@ class SyncTask {
                         };
                         if (tx != null) {
                             _.extend(raw, tx.data);
+                            queryUtil.cleanItem(raw, true);
                             await dao.save(db, "org", raw)
                         }
                         // await dao.findAndUpdate(db, "org", {name: data.name}, {$set: raw});
@@ -220,6 +221,7 @@ class SyncTask {
                         if (tx != null) {
                             _.extend(record, tx.data);
                         }
+                        queryUtil.cleanItem(record, true);
                         await dao.save(db, "record", record);
                         break;
                     }
