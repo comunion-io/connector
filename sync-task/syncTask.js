@@ -239,6 +239,9 @@ class SyncTask {
         catch (e) {
             // TODO: 事务回滚
             // 需要抛出异常，让service知道失败了
+            // 保存最后同步完成的区块 data.blockHeight
+            let height = data.blockHeight;
+            await dao.findAndUpdate(db, "sync", {}, {$set: {last: height}});
             throw e;
         }
     }
